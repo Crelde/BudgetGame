@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/goalName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Goal name: " />
+    
+    <TextView
+        android:id="@+id/goalNameE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/goalName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/goalAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/goalName"
+        android:layout_below="@+id/goalName"
+        android:text="Mål: " />
+    
+        <TextView
+        android:id="@+id/goalAmountE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/goalAmount"
+        android:layout_below="@+id/goalName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/currentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goalAmount"
+        android:text="Penge opsparet: " />
+    
+    <TextView
+        android:id="@+id/currentStatusE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/currentStatus"
+        android:layout_below="@+id/goalAmount"
+        android:text="" />
+
+    </RelativeLayout>
