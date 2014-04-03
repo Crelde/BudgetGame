@@ -7,40 +7,41 @@
     <FrameLayout
         android:id="@+id/FragmentContainer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button3"
-        android:layout_alignBottom="@+id/button3"
-        android:layout_alignParentRight="true"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button3"
+        android:text="Home" />
+    
+      <Button
+        android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button4"
-        android:text="Button" />
+        android:layout_alignParentRight="true"
+        android:text="Indstillinger"
+        android:textSize="12dp" />
+
+      <Button
+          android:id="@+id/postsButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_toRightOf="@+id/homeButton"
+          android:text="Posteringer"
+          android:textSize="12dp" />
+
+      <Button
+          android:id="@+id/goalsButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_toLeftOf="@+id/settingsButton"
+          android:text="Mål" />
 
 </RelativeLayout>
