@@ -1,15 +1,25 @@
 package com.example.budgetgame;
 
+import com.example.budgetgame.frags.PostsFrag;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
 
+	PostsFrag listfrag = new PostsFrag();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.postlist);
+		setContentView(R.layout.activity_main);
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		
+		ft.add(R.id.FragmentContainer, listfrag);
+		ft.commit();
 	}
 
 	@Override

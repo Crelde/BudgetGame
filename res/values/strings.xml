@@ -4,6 +4,6 @@
     <string name="app_name">BudgetGame</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="crelde">Crelde does NOT rock.</string>
+    <string name="crelde">Crelde does rock.</string>
 
 </resources>
