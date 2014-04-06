@@ -2,22 +2,42 @@ package com.example.budgetgame.frags;
 
 
 import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 import android.app.ListFragment;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SimpleCursorAdapter;
 
 public class GoalFrag extends ListFragment {
-	//TODO implement adapter and get a bit of sample data for some goals up and fit them with the custom listitem.xml (goalitem).
-    // It will just say LOADING... on the screen untill its done.
-	@Override  
-	  public View onCreateView(LayoutInflater inflater, ViewGroup container,  
-	    Bundle savedInstanceState) {  
-	 
-	   return super.onCreateView(inflater, container, savedInstanceState);  
-	  }  
+
+
+	DBAdapter dbAdapter;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		dbAdapter = new DBAdapter(getActivity());
+		dbAdapter.open();
+		Cursor c = dbAdapter.getAllGoals();
+		getActivity().startManagingCursor(c);
+		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+				getActivity(), R.layout.goalitem, c, new String[] {
+						"titel", "beloebCurrent", "beloebMål" }, new int[] { R.id.goalNameE,
+						R.id.currentStatusE, R.id.goalAmountE});
+		setListAdapter(cursorAdapter);
+
+	}
+	
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		dbAdapter.close();
+	}
 
 
 }

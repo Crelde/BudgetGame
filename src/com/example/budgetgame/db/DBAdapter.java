@@ -9,7 +9,8 @@ public class DBAdapter {
 	SQLiteDatabase db;
 	Context context;
 	
-	String TABLE_NAME = "Posteringer";
+	String TABLE_POSTS = "Posteringer";
+	String TABLE_GOALS = "Goals";
 
 	public DBAdapter(Context context) {
 		helper = new DBHelper(context);
@@ -25,12 +26,18 @@ public class DBAdapter {
 	}
 
 	public Cursor getAllPosts(){
-		Cursor query = db.query(TABLE_NAME, new String[] { "_id", "titel", "dato", "beloeb" }, null, null, null, null,
+		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, null, null, null, null,
+				"_id DESC");
+		return query;
+	}
+	
+	public Cursor getAllGoals(){
+		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål" }, null, null, null, null,
 				"_id DESC");
 		return query;
 	}
 	
 	public void clearPosts() {
-		db.delete(TABLE_NAME, null, null);
+		db.delete(TABLE_POSTS, null, null);
 	}
 }
