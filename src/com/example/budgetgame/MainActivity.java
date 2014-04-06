@@ -43,10 +43,11 @@ public class MainActivity extends Activity {
 		settingsButton = (Button) findViewById(R.id.settingsButton);
 	
 		// Initial adding of the overview fragment
-		FragmentManager fm = getFragmentManager();
-		FragmentTransaction ft = fm.beginTransaction();
-		ft.add(R.id.FragmentContainer, overfrag);
-		ft.commit();
+			FragmentManager fm = getFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			ft.replace(R.id.FragmentContainer, overfrag);
+			ft.commit();
+			
 		
 
 		// Implementations of button onclicks so they change between the fragments
@@ -95,12 +96,12 @@ public class MainActivity extends Activity {
 		});
 	}
 
-
+	/* We are not, as of yet, using the options menu.
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	 */
 }
