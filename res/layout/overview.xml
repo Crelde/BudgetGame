@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/graf"
-        android:contentDescription="@string/imageDesc"
-		/>
-
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
         android:layout_width="fill_parent" 
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView1"        
+        android:layout_height="wrap_content"  
+        android:orientation="vertical"   
         >
+    
+ 
        <RelativeLayout 
 	       android:layout_width="fill_parent" 
 	       android:layout_height="wrap_content">
+	           
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/graf"
+	        android:contentDescription="@string/imageDesc"
+			/>
+           
 		    <TextView
 		        android:id="@+id/currText"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_below="@id/imageView1"
 		        android:layout_alignParentLeft="true"
 		        android:layout_marginLeft="25dp"
 		        android:layout_marginTop="20dp"
@@ -128,7 +127,8 @@
 		        android:layout_alignParentLeft="true"
 		        android:layout_marginLeft="25dp"
 		        android:layout_below="@id/payDayText"
-		        android:layout_marginTop="25dp"		        
+		        android:layout_marginTop="25dp"	
+		        android:textColor="@color/gray"	        
 		        android:text="@string/synced"
 		        />
 		    <TextView
@@ -138,6 +138,7 @@
 		        android:layout_toRightOf="@id/syncedText"
 		        android:layout_alignBottom="@id/syncedText"
 		        android:layout_marginLeft="5dp"
+		        android:textColor="@color/gray"
 		        android:text="@string/syncedVal"
 		        
 		        
@@ -146,4 +147,3 @@
 	    </RelativeLayout>
     </ScrollView>
 
-</RelativeLayout>
