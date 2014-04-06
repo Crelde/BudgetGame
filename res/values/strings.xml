@@ -5,5 +5,23 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="crelde">Crelde does rock.</string>
+    <string name="imageDesc">Graf-billede</string>
+    <string name="currSaldo">Nuværende saldo:</string>
+    <string name="saldoVal">9701,52 kr.</string>
+    <string name="avaible">Rådighedsbeløb:</string>
+    <string name="avaibleVal">7601,52 kr.</string>
+    <string name="perDayPrev">Brugt pr. dag:</string>
+    <string name="perDayPrevVal">94,17 kr.</string>
+    <string name="perDayComing">Til rådighed pr dag:</string>
+    <string name="perDayComingVal">167,5 kr.</string>
+    <string name="payDayIn">Løn om:</string>
+    <string name="payDayVal">19 dage</string>
+    <string name="savings">Opsparet denne månede:</string>
+    <string name="savingsVal">2100 kr.</string>
+    <string name="synced">Sidst synkroniseret d.</string>
+    <string name="syncedVal">07-04-2014</string>
+    
+   
+    
 
 </resources>
