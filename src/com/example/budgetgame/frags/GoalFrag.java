@@ -32,6 +32,12 @@ public class GoalFrag extends ListFragment {
 
 	}
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.goals, container, false);
+	}
+	
 	
 	@Override
 	public void onDestroy() {

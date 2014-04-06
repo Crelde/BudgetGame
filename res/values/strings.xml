@@ -19,8 +19,9 @@
     <string name="savings">Opsparet denne månede:</string>
     <string name="savingsVal">2100 kr.</string>
     <string name="synced">Sidst synkroniseret d.</string>
-    <string name="syncedVal">07-04-2014</string>
-    
+    <string name="syncedVal">07&#8211;04&#8211;2014</string>
+    <string name="newGoal">Nyt mål</string>
+    <string name="history">Historie</string>
    
     
 
