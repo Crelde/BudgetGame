@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
@@ -35,12 +36,22 @@ public class MainActivity extends FragmentActivity {
 	private Button goalsButton;
 	private Button settingsButton;
 
+	// Filter Controls
 	private Button filterOK;
 	private Button filterCancel;
-	
 	private CheckBox checkpos;
 	private CheckBox checkneg;
-	private Dialog myCustomDialog;
+	private Dialog postsDialog;
+	private Dialog newGoalDialog;
+	
+	//New goal controls
+	private Button opretMålButton;
+	private Button cancelNytMålButton;
+	private EditText newGoalNameE;
+	private EditText newGoalAmountE;
+	private EditText newGoalAmountMonthE;
+	
+	
 	// Fragments
 	PostsFrag postfrag = new PostsFrag();
 	OverviewFrag overfrag = new OverviewFrag();
@@ -119,16 +130,16 @@ public class MainActivity extends FragmentActivity {
 	}
 
 
-	public void ShowDialog(View v){
+	public void ShowPostsDialog(View v){
 		
-		myCustomDialog = new Dialog(MainActivity.this);
-		myCustomDialog.setContentView(R.layout.filterdialog);
-		myCustomDialog.setTitle("Vælg Filtre");
-		myCustomDialog.show();
-		checkpos = (CheckBox)myCustomDialog.findViewById(R.id.checkpos);
-		checkneg = (CheckBox)myCustomDialog.findViewById(R.id.checkneg);
-		filterOK = (Button)myCustomDialog.findViewById(R.id.filterOK);
-		filterCancel = (Button)myCustomDialog.findViewById(R.id.filterCancel);
+		postsDialog = new Dialog(MainActivity.this);
+		postsDialog.setContentView(R.layout.filterdialog);
+		postsDialog.setTitle("Vælg Filtre");
+		postsDialog.show();
+		checkpos = (CheckBox)postsDialog.findViewById(R.id.checkpos);
+		checkneg = (CheckBox)postsDialog.findViewById(R.id.checkneg);
+		filterOK = (Button)postsDialog.findViewById(R.id.filterOK);
+		filterCancel = (Button)postsDialog.findViewById(R.id.filterCancel);
 		
 		filterOK.setOnClickListener(new View.OnClickListener() {
 			
@@ -143,14 +154,47 @@ public class MainActivity extends FragmentActivity {
 				else
 					f.updatePosts(true, true);
 				
-				myCustomDialog.dismiss();
+				postsDialog.dismiss();
 			}});
 		
 		filterCancel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				myCustomDialog.cancel();
+				postsDialog.cancel();
+			}});
+	
+		
+	}
+
+	public void ShowNewGoalDialog(View v){
+		
+		newGoalDialog = new Dialog(MainActivity.this);
+		newGoalDialog.setContentView(R.layout.newgoaldialog);
+		newGoalDialog.setTitle("Opret nyt mål");
+		newGoalDialog.show();
+		newGoalNameE = (EditText)newGoalDialog.findViewById(R.id.newGoalNameE);
+		newGoalAmountE= (EditText)newGoalDialog.findViewById(R.id.newGoalAmountE);
+		newGoalAmountMonthE = (EditText)newGoalDialog.findViewById(R.id.newGoalAmountMonthE);
+		opretMålButton = (Button)newGoalDialog.findViewById(R.id.opretMÃ¥lButton);
+		cancelNytMålButton= (Button)newGoalDialog.findViewById(R.id.cancelNytMÃ¥lButton);
+		
+		opretMålButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				GoalFrag g = (GoalFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
+				// if the user doesn't check anything we'll show everything (as if they pressed both)
+				g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()));
+				
+				newGoalDialog.dismiss();
+			}});
+		
+		cancelNytMålButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				newGoalDialog.cancel();
 			}});
 	
 		

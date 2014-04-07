@@ -11,15 +11,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 
 public class GoalFrag extends ListFragment {
 
 	DBAdapter dbAdapter;
 
+	
+	
+	public void setNewGoal(String titel, int beloeb){
+		dbAdapter.setNewGoal(titel, beloeb);
+		initGoals();
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		initGoals();
+		
+	}
+	public void initGoals(){
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		Cursor c = dbAdapter.getAllGoals();
@@ -29,9 +41,6 @@ public class GoalFrag extends ListFragment {
 						"titel", "beloebCurrent", "beloebMål" }, new int[] { R.id.goalNameE,
 						R.id.currentStatusE, R.id.goalAmountE});
 		setListAdapter(cursorAdapter);
-
-		
-
 		
 	}
 	

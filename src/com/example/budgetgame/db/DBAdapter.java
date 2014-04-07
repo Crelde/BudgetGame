@@ -48,6 +48,13 @@ public class DBAdapter {
 		return query;
 	}
 	
+	// Sets new goal and returns updated cursor
+	public Cursor setNewGoal(String titel, int mål){
+		String rawq = "INSERT INTO "+TABLE_GOALS+"(titel, beloebCurrent, beloebMål) VALUES ("+titel+", 0, "+mål+");";
+		db.execSQL("INSERT INTO " + TABLE_GOALS+ " (titel, beloebCurrent, beloebMål) VALUES ('"+titel+"', 0, "+mål+")");
+		return getAllGoals();
+	}
+	
 	public void clearPosts() {
 		db.delete(TABLE_POSTS, null, null);
 	}
