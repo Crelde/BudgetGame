@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="40dp"
+     >
 
     <TextView
         android:id="@+id/goalName"
@@ -10,22 +12,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Goal name: " />
+        android:layout_alignRight="@+id/currentStatus"
+        android:textSize="20sp"
+        android:text="Mål titel: " />
     
     <TextView
         android:id="@+id/goalNameE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/goalName"
-        android:text="" />
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:maxLength="20"
+        android:text=""
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/goalAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/goalName"
+        android:layout_alignRight="@+id/currentStatus"
         android:layout_below="@+id/goalName"
+        android:textSize="20sp"
         android:text="Mål: " />
     
         <TextView
@@ -34,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/goalAmount"
         android:layout_below="@+id/goalName"
+        android:textSize="20sp"
         android:text="" />
 
     <TextView
@@ -41,7 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/goalAmount"
-        android:text="Penge opsparet: " />
+        android:textSize="20sp"
+        android:text="Opsparet: " />
     
     <TextView
         android:id="@+id/currentStatusE"
@@ -49,24 +62,9 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/currentStatus"
         android:layout_below="@+id/goalAmount"
+        android:textSize="20sp"
         android:text="" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
-        android:text="Færdiggør" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/currentStatus"
-        android:layout_marginLeft="51dp"
-        android:text="Redigér" />
+   
 
     </RelativeLayout>

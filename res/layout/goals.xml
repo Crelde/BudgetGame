@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:text="@string/newGoal"
         android:layout_alignParentRight="true"
-	    android:onClick="ShowNewGoalDialog" 
-                
+	    android:onClick="ShowNewGoalDialog"   
         />
+    
     <ListView 
         android:id="@android:id/list"
         android:layout_below="@id/newGoalButton"
