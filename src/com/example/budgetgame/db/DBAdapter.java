@@ -30,6 +30,17 @@ public class DBAdapter {
 				"_id DESC");
 		return query;
 	}
+	public Cursor getNegPosts(){
+		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb < 0", null, null, null,
+				"_id DESC");
+		return query;
+	}
+	
+	public Cursor getPosPosts(){
+		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb >= 0", null, null, null,
+				"_id DESC");
+		return query;
+	}
 	
 	public Cursor getAllGoals(){
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål" }, null, null, null, null,

@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/vispostT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:text="Vis Posteringer: " >
+    </TextView>
+
+    <CheckBox
+        android:id="@+id/checkpos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/vispostT"
+        android:layout_below="@id/vispostT"
+        android:text="Positive" />
+
+    <CheckBox
+        android:id="@+id/checkneg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vispostT"
+        android:layout_toRightOf="@id/checkpos"
+        android:text="Negative" />
+
+    <Button
+        android:id="@+id/filterCancel"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/filterOK"
+        android:layout_alignBottom="@+id/filterOK"
+        android:layout_toRightOf="@+id/filterOK"
+        android:text="Fortryd" />
+
+    <Button
+        android:id="@+id/filterOK"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/checkpos"
+        android:layout_below="@+id/checkpos"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="34dp"
+        android:text="OK" />
+
+</RelativeLayout>

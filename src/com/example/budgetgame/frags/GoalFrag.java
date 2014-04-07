@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 
 public class GoalFrag extends ListFragment {
-
 
 	DBAdapter dbAdapter;
 
@@ -30,6 +30,9 @@ public class GoalFrag extends ListFragment {
 						R.id.currentStatusE, R.id.goalAmountE});
 		setListAdapter(cursorAdapter);
 
+		
+
+		
 	}
 	
 	@Override
@@ -37,7 +40,7 @@ public class GoalFrag extends ListFragment {
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.goals, container, false);
 	}
-	
+
 	
 	@Override
 	public void onDestroy() {
