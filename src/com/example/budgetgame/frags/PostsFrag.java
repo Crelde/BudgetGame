@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 public class PostsFrag extends ListFragment {
 
@@ -36,6 +34,7 @@ public class PostsFrag extends ListFragment {
 						"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
+		
 	}
 	public void initPosPosts(){
 		dbAdapter = new DBAdapter(getActivity());

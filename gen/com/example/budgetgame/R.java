@@ -29,12 +29,13 @@ public final class R {
     }
     public static final class id {
         public static final int FragmentContainer=0x7f090000;
+        public static final int acceptNewGoalButton=0x7f09001b;
         public static final int action_settings=0x7f09002f;
         public static final int avaibleValue=0x7f090023;
         public static final int aviableText=0x7f09001e;
         public static final int beloeb=0x7f09002b;
         public static final int button1=0x7f090010;
-        public static final int cancelNytMålButton=0x7f09001a;
+        public static final int cancelNewGoalButton=0x7f09001a;
         public static final int checkneg=0x7f090007;
         public static final int checkpos=0x7f090006;
         public static final int comingText=0x7f090020;
@@ -63,7 +64,6 @@ public final class R {
         public static final int newGoalButton=0x7f090013;
         public static final int newGoalName=0x7f090014;
         public static final int newGoalNameE=0x7f090015;
-        public static final int opretMålButton=0x7f09001b;
         public static final int payDayText=0x7f090021;
         public static final int payDayValue=0x7f090026;
         public static final int postsButton=0x7f090003;

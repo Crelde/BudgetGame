@@ -8,22 +8,15 @@ import com.example.budgetgame.frags.SettingFrag;
 
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
-import android.database.Cursor;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -45,8 +38,8 @@ public class MainActivity extends FragmentActivity {
 	private Dialog newGoalDialog;
 	
 	//New goal controls
-	private Button opretMålButton;
-	private Button cancelNytMålButton;
+	private Button acceptGoalButton;
+	private Button cancelNewGoalButton;
 	private EditText newGoalNameE;
 	private EditText newGoalAmountE;
 	private EditText newGoalAmountMonthE;
@@ -176,21 +169,28 @@ public class MainActivity extends FragmentActivity {
 		newGoalNameE = (EditText)newGoalDialog.findViewById(R.id.newGoalNameE);
 		newGoalAmountE= (EditText)newGoalDialog.findViewById(R.id.newGoalAmountE);
 		newGoalAmountMonthE = (EditText)newGoalDialog.findViewById(R.id.newGoalAmountMonthE);
-		opretMålButton = (Button)newGoalDialog.findViewById(R.id.opretMÃ¥lButton);
-		cancelNytMålButton= (Button)newGoalDialog.findViewById(R.id.cancelNytMÃ¥lButton);
-		
-		opretMålButton.setOnClickListener(new View.OnClickListener() {
+		acceptGoalButton = (Button)newGoalDialog.findViewById(R.id.acceptNewGoalButton);
+		cancelNewGoalButton= (Button)newGoalDialog.findViewById(R.id.cancelNewGoalButton);
+		newGoalDialog.setCancelable(false);
+		acceptGoalButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				GoalFrag g = (GoalFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
 				// if the user doesn't check anything we'll show everything (as if they pressed both)
-				g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()));
-				
-				newGoalDialog.dismiss();
+			
+				if(newGoalNameE.getText().toString().trim().length() <= 0 ||
+						newGoalAmountE.getText().toString().trim().length() <= 0 || 
+							newGoalAmountMonthE.getText().toString().trim().length() <= 0){		
+					Toast.makeText(getApplicationContext(), "Udfyld venligst alle felter!", Toast.LENGTH_SHORT).show();		
+				}
+				else {				
+					g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()));
+					newGoalDialog.dismiss();
+				}	
 			}});
 		
-		cancelNytMålButton.setOnClickListener(new View.OnClickListener() {
+		cancelNewGoalButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

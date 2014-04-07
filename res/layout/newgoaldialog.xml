@@ -2,44 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="20dp" >
 
     <TextView
         android:id="@+id/newGoalName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Indtast navnet på dit nye mål: "
-        android:minHeight="50dp" />
+        android:maxWidth="200dp" />
     
 
     <EditText
         android:id="@+id/newGoalNameE"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/newGoalName"
-        android:layout_toRightOf="@id/newGoalName"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newGoalName"
         android:ems="10"
-        android:minHeight="50dp" /> />
+        android:minHeight="50dp"/>
     
     <TextView 
         android:id="@+id/newGoalAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hvor meget skal spares op?"
-        android:layout_below="@id/newGoalName"
-        android:minHeight="50dp" />
-        />
-        
+        android:layout_below="@id/newGoalNameE"
+        android:minHeight="50dp"
+        android:maxWidth="200dp" />
+       
 	<EditText
 	    android:id="@+id/newGoalAmountE"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_alignBottom="@+id/newGoalAmount"
-	    android:layout_below="@+id/newGoalName"
-	    android:layout_toRightOf="@id/newGoalAmount"
+	    android:layout_below="@+id/newGoalNameE"
+	    android:layout_toRightOf="@+id/newGoalAmountMonth"
 	    android:ems="10"
 	    android:inputType="number"
-	    android:minHeight="50dp" /> />
+	    android:minHeight="50dp" />
+ />
 	
 	<TextView 
         android:id="@+id/newGoalAmountMonth"
@@ -48,7 +49,7 @@
         android:text="Hvor meget vil du ligge til side hver måned?"
         android:layout_below="@id/newGoalAmount"
         android:minHeight="50dp"
-        android:maxWidth="250dp"
+        android:maxWidth="200dp"
         android:singleLine="false"
          />
         
@@ -64,25 +65,27 @@
 	    android:inputType="number"
 	    android:minHeight="50dp" /> />
 
+	
+
 	<Button
-	    android:id="@+id/cancelNytMålButton"
+	    android:id="@+id/cancelNewGoalButton"
 	    style="?android:attr/buttonStyleSmall"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignRight="@+id/newGoalAmountMonth"
 	    android:layout_below="@+id/newGoalAmountMonth"
-	    android:layout_marginRight="43dp"
-	    android:layout_marginTop="42dp"
+	    android:layout_marginTop="41dp"
+	    android:layout_toRightOf="@+id/newGoalAmount"
 	    android:text="Fortryd" />
 
 	<Button
-	    android:id="@+id/opretMålButton"
+	    android:id="@+id/acceptNewGoalButton"
 	    style="?android:attr/buttonStyleSmall"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/cancelNytMålButton"
-	    android:layout_alignBottom="@+id/cancelNytMålButton"
-	    android:layout_toLeftOf="@+id/cancelNytMålButton"
-	    android:text="Opret nyt mål"/>
+	    android:layout_alignBaseline="@+id/cancelNewGoalButton"
+	    android:layout_alignBottom="@+id/cancelNewGoalButton"
+	    android:layout_alignRight="@+id/newGoalAmount"
+	    android:layout_marginRight="20dp"
+	    android:text="Opret nyt mål" />
 
 </RelativeLayout>
