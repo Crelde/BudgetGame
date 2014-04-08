@@ -2,6 +2,7 @@ package com.example.budgetgame;
 
 import com.example.budgetgame.db.DBAdapter;
 import com.example.budgetgame.frags.GoalFrag;
+import com.example.budgetgame.frags.GoalHistoryFrag;
 import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
 import com.example.budgetgame.frags.SettingFrag;
@@ -199,6 +200,7 @@ public class MainActivity extends FragmentActivity {
 	
 		
 	}
+	
 	
 	
 	

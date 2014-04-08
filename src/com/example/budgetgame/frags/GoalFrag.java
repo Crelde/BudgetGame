@@ -1,16 +1,20 @@
 package com.example.budgetgame.frags;
 
 
-import com.example.budgetgame.R;
-import com.example.budgetgame.db.DBAdapter;
-
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
+
+import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 public class GoalFrag extends ListFragment {
 
@@ -28,6 +32,24 @@ public class GoalFrag extends ListFragment {
 		super.onCreate(savedInstanceState);
 		initGoals();
 		
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		Button goalHistoryButton = (Button) getActivity().findViewById(R.id.goalHistoryButton);
+		goalHistoryButton.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			FragmentManager fm = getFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			ft.addToBackStack(null);
+			ft.replace(R.id.FragmentContainer, new GoalHistoryFrag());
+			ft.commit();					
+		}
+	});
 	}
 	public void initGoals(){
 		dbAdapter = new DBAdapter(getActivity());

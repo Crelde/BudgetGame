@@ -22,6 +22,9 @@
     <string name="syncedVal">07&#8211;04&#8211;2014</string>
     <string name="newGoal">Nyt mål</string>
     <string name="history">Historie</string>
+    <string name="goalNameVal">MålNavn</string>
+    <string name="goalDateVal">07-04-2012</string>
+    <string name="historyDescVal">Du sparede 500 kr op!</string>
    
     
 
