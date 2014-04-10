@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 
+import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
 
@@ -66,7 +67,8 @@ public class GoalFrag extends ListFragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+			Bundle savedInstanceState) {	
+		((MainActivity) getActivity()).setActiveFragment(MainActivity.FRAGMENT_GOALS);
 		return inflater.inflate(R.layout.goals, container, false);
 	}
 

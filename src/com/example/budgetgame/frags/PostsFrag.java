@@ -1,5 +1,6 @@
 package com.example.budgetgame.frags;
 
+import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
 
@@ -63,7 +64,8 @@ public class PostsFrag extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-			initAllPosts();
+		initAllPosts();
+		
 
 	}
 
@@ -71,6 +73,7 @@ public class PostsFrag extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		((MainActivity) getActivity()).setActiveFragment(MainActivity.FRAGMENT_POSTS);
 		return inflater.inflate(R.layout.postlist, container, false);
 	}
 	

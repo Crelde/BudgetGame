@@ -4,44 +4,80 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
     
-    <FrameLayout
-        android:id="@+id/FragmentContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp" />
 
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Home" />
-    
-      <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Indstillinger"
-        android:textSize="12dp" />
 
-      <Button
-          android:id="@+id/postsButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_toRightOf="@+id/homeButton"
-          android:text="Posteringer"
-          android:textSize="12dp" />
+        <LinearLayout
+            android:id="@+id/linLayout"
+            android:layout_width="fill_parent"
+       		android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true">
+            
+	        <LinearLayout
+	             android:layout_weight="1"
+	             android:layout_width="0dp"
+		    	 android:layout_height="wrap_content"
+		    	 android:background="@drawable/buttonborder"
+		    	 >
+				 <ImageButton 
+				    android:id="@+id/homeButton"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:src="@drawable/nav_icon_home"
+				    android:background="@color/lightGreen"
+					/>
+			</LinearLayout>
+			<LinearLayout
+	             android:layout_weight="1"
+	             android:layout_width="0dp"
+		    	 android:layout_height="wrap_content"
+		    	 android:background="@drawable/buttonborder"
+		    	 >
+			<ImageButton 
+			    android:id="@+id/settingsButton"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		   	    android:src="@drawable/nav_icon_settings"
+		   	    android:background="@color/lightGreen"
+	        	android:layout_weight="1"
+			    />
+			</LinearLayout>
+			<LinearLayout
+	             android:layout_weight="1"
+	             android:layout_width="0dp"
+		    	 android:layout_height="wrap_content"
+		    	 android:background="@drawable/buttonborder"
+		    	 >
+			<ImageButton 
+		   		 android:id="@+id/goalsButton"
+		         android:layout_width="0dp"
+		         android:layout_height="wrap_content"
+		         android:src="@drawable/nav_icon_goals"
+		         android:background="@color/lightGreen" 
+		         android:layout_weight="1"
+		         />
+			</LinearLayout>
+			<LinearLayout
+	             android:layout_weight="1"
+	             android:layout_width="0dp"
+		    	 android:layout_height="wrap_content"
+		    	 android:background="@drawable/buttonborder"
+		    	 >
+			<ImageButton 
+		    	android:id="@+id/postsButton"
+			    android:layout_width="0dp"
+		        android:layout_height="wrap_content"       
+		        android:src="@drawable/nav_icon_list"
+		        android:background="@color/lightGreen" 
+		        android:layout_weight="1"
+				/>
+			</LinearLayout>
+		</LinearLayout>
+		<FrameLayout 
+		    android:id="@+id/FragmentContainer"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_above="@id/linLayout"
+		    />
 
-      <Button
-          android:id="@+id/goalsButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_toLeftOf="@+id/settingsButton"
-          android:text="Mål" />
-
+	
 </RelativeLayout>

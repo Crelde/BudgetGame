@@ -18,4 +18,6 @@
     </style>
 
     <color name="gray">#999999</color>
+    <color name="lightGreen">#7FFD11</color>
+    <color name="darkGreen">#47890E</color>
 </resources>

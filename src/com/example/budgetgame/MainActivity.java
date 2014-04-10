@@ -1,35 +1,34 @@
 package com.example.budgetgame;
 
-import com.example.budgetgame.db.DBAdapter;
-import com.example.budgetgame.frags.GoalFrag;
-import com.example.budgetgame.frags.GoalHistoryFrag;
-import com.example.budgetgame.frags.OverviewFrag;
-import com.example.budgetgame.frags.PostsFrag;
-import com.example.budgetgame.frags.SettingFrag;
-
-
-import android.os.Bundle;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+import com.example.budgetgame.db.DBAdapter;
+import com.example.budgetgame.frags.GoalFrag;
+import com.example.budgetgame.frags.OverviewFrag;
+import com.example.budgetgame.frags.PostsFrag;
+import com.example.budgetgame.frags.SettingFrag;
+
+public class MainActivity extends Activity {
 
 	private String posttag = "POST_TAG";
 	DBAdapter dbAdapter;
 	// Buttons
-	private Button homeButton;
-	private Button postsButton;
-	private Button goalsButton;
-	private Button settingsButton;
-
+	private ImageButton homeButton;
+	private ImageButton postsButton;
+	private ImageButton goalsButton;
+	private ImageButton settingsButton;
+	
 	// Filter Controls
 	private Button filterOK;
 	private Button filterCancel;
@@ -52,6 +51,14 @@ public class MainActivity extends FragmentActivity {
 	GoalFrag goalfrag = new GoalFrag();
 	SettingFrag settingfrag = new SettingFrag();
 	
+	public static final int FRAGMENT_HOME = 1;
+	public static final int FRAGMENT_GOALS = 2;
+	public static final int FRAGMENT_SETTINGS = 3;
+	public static final int FRAGMENT_POSTS = 4;
+	
+	//Layout width
+	private int layoutWidth=320;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,29 +67,25 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		
 		// Button initializers
-		homeButton = (Button) findViewById(R.id.homeButton);
-		postsButton = (Button) findViewById(R.id.postsButton);
-		goalsButton = (Button) findViewById(R.id.goalsButton);
-		settingsButton = (Button) findViewById(R.id.settingsButton);
-		
+		homeButton = (ImageButton) findViewById(R.id.homeButton);
+		postsButton = (ImageButton) findViewById(R.id.postsButton);
+		goalsButton = (ImageButton) findViewById(R.id.goalsButton);
+		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
 	
-		// Initial adding of the overview fragment
-			FragmentManager fm = getFragmentManager();
-			FragmentTransaction ft = fm.beginTransaction();
-			ft.replace(R.id.FragmentContainer, overfrag);
-			ft.commit();
-			
+		// Initial adding of the overview fragment.
+		if (savedInstanceState == null)
+		{
+			changeFragment(FRAGMENT_HOME); 	
+		}
 		
-
+		
+					
 		// Implementations of button onclicks so they change between the fragments
 		homeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.replace(R.id.FragmentContainer, overfrag);
-				ft.commit();;	
+				changeFragment(FRAGMENT_HOME);
 			}
 		});
 		
@@ -90,11 +93,7 @@ public class MainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.replace(R.id.FragmentContainer, postfrag, posttag);
-				ft.commit();;	
-
+				changeFragment(FRAGMENT_POSTS);
 			}
 		});
 		
@@ -102,10 +101,7 @@ public class MainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.replace(R.id.FragmentContainer, goalfrag);
-				ft.commit();;	
+				changeFragment(FRAGMENT_GOALS);	
 			}
 		});
 		
@@ -113,14 +109,55 @@ public class MainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				FragmentManager fm = getFragmentManager();
-				FragmentTransaction ft = fm.beginTransaction();
-				ft.replace(R.id.FragmentContainer, settingfrag);
-				ft.commit();	
+				changeFragment(FRAGMENT_SETTINGS);	
 			}
 		});
 
 		
+	}
+	
+	public void makeToast(String toast){ Toast.makeText(this, toast, Toast.LENGTH_SHORT).show(); }
+	
+	private void defineLayoutWidth(int width){
+		layoutWidth = width;
+	}
+	
+	
+	public void changeFragment(int fragment){
+		
+		setActiveFragment(fragment);
+		
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		
+		//getResources().getColor(R.color.idname);
+		if (fragment == FRAGMENT_HOME) ft.replace(R.id.FragmentContainer, overfrag);
+		
+		else if (fragment == FRAGMENT_POSTS) ft.replace(R.id.FragmentContainer, postfrag);
+		
+		else if (fragment == FRAGMENT_GOALS) ft.replace(R.id.FragmentContainer, goalfrag);
+		
+		else if (fragment == FRAGMENT_SETTINGS) ft.replace(R.id.FragmentContainer, settingfrag);
+			
+		else { /* Error situation*/ }
+		
+		
+		ft.commit();
+	}
+	
+	public void setActiveFragment(int fragment){
+		
+		if (fragment == FRAGMENT_HOME) homeButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+		else homeButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+		
+		if (fragment == FRAGMENT_POSTS) postsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+		else postsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+		
+		if (fragment == FRAGMENT_GOALS) goalsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+		else goalsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+		
+		if (fragment == FRAGMENT_SETTINGS) settingsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+		else settingsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
 	}
 
 

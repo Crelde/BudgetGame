@@ -1,5 +1,6 @@
 package com.example.budgetgame.frags;
 
+import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 
 import android.app.Fragment;
@@ -14,6 +15,7 @@ public class SettingFrag extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.settings, container, false);
+		((MainActivity) getActivity()).setActiveFragment(MainActivity.FRAGMENT_SETTINGS);
 		return v;
 	}
 	
