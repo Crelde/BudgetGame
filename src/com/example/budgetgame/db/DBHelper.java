@@ -6,11 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
-	public static final int DB_VERSION = 2;
+	public static final int DB_VERSION = 6;
 	public static final String DB_POSTS = "budget";
 	public static final String APP_POSTS = "BudgetApp";
 	public static final String TABLE_POSTS = "Posteringer";
 	public static final String TABLE_GOALS = "Goals";
+	public static final String TABLE_GOALS_HISTORY = "History";
 	
 	Context context;
 
@@ -31,16 +32,28 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Amazon', '05-05-2014', -350)");
 		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Bilka', '09-05-2014', -1252.20)");
 		
-		db.execSQL("CREATE TABLE " + TABLE_GOALS + " (_id integer primary key autoincrement, titel text, beloebCurrent float, beloebMål float)");
-		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ny Cykel', 500,  3500)");
-		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ferie Mallorca', 1600 ,8400)");
+		db.execSQL("CREATE TABLE " + TABLE_GOALS + " (_id integer primary key autoincrement, titel text, beloebCurrent float, beloebMål float, toSavePerMonth float, dateCreated date, )");
+		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ny Cykel', 500,  3500, 500, '2014-03-17')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ferie Mallorca', 1600 , 8400, 400, '2014-01-07')");
+		
+		db.execSQL("CREATE TABLE " + TABLE_GOALS_HISTORY + " (_id integer primary key autoincrement, titel text, beskrivelse text, dato date)");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Julegaver', 'Du sparede 750 kroner op.',  '2013-10-31')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Julegaver', 'Du sparede 750 kroner op, og opnåede dit mål om at spare 1500 til Julegaver!',  '2013-11-30')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Ferie Mallorca', 'Du sparede 400 kroner op.',  '2014-02-01')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Ferie Mallorca', 'Du sparede 400 kroner op.',  '2014-03-01')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Ferie Mallorca', 'Du sparede 400 kroner op.',  '2014-04-01')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Ferie Mallorca', 'Du sparede 400 kroner op.',  '2014-05-01')");
 		
 		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+		db.execSQL("DROP TABLE " + TABLE_POSTS);
+		db.execSQL("DROP TABLE " + TABLE_GOALS);
+		db.execSQL("DROP TABLE " + TABLE_GOALS_HISTORY);
+		
+		
 		onCreate(db);
 	}
 	

@@ -1,9 +1,15 @@
 package com.example.budgetgame;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -223,7 +229,7 @@ public class MainActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "Udfyld venligst alle felter!", Toast.LENGTH_SHORT).show();		
 				}
 				else {				
-					g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()));
+					g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
 					newGoalDialog.dismiss();
 				}	
 			}});
@@ -238,7 +244,19 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	
+	public void setStandardAlarmForGoal(int goalId){
+		// Set startDate to be the 1st of the next month, (if the alarm is created on the 7th of January, the Alarm will start on the 1st of February.
+		Calendar startDate = Calendar.getInstance();
+		startDate.add(Calendar.MONTH, 1);
+		startDate.set(Calendar.DATE, 1);
+
+		AlarmManager alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+		
+		Intent intent = new Intent(this, SavingsAlarmReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, goalId, intent, 0);
+		
+		alarmManager.set(AlarmManager.RTC, startDate.getTimeInMillis(), pendingIntent);
+	}
 	
 	
 	/* We are not, as of yet, using the options menu.

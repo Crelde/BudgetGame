@@ -23,8 +23,8 @@ public class GoalFrag extends ListFragment {
 
 	
 	
-	public void setNewGoal(String titel, int beloeb){
-		dbAdapter.setNewGoal(titel, beloeb);
+	public void setNewGoal(String titel, int beloeb, int toSave){
+		dbAdapter.setNewGoal(titel, beloeb, toSave);
 		initGoals();
 	}
 	
