@@ -35,6 +35,7 @@ public class initialController {
 				if (exception == null) {
 					for (User item : result) {
 						Log.i(TAG, "Read object with ID " + item.brugernavn);
+						// Test change in branch
 					}
 				}
 			}
