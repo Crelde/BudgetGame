@@ -29,6 +29,7 @@ public class LogInActivity extends Activity {
 				
 				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(intent);
+				// Test
 				
 			}
 		});
