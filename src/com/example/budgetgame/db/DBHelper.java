@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
-	public static final int DB_VERSION = 6;
+	public static final int DB_VERSION = 9;
 	public static final String DB_POSTS = "budget";
 	public static final String APP_POSTS = "BudgetApp";
 	public static final String TABLE_POSTS = "Posteringer";
@@ -32,9 +32,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Amazon', '05-05-2014', -350)");
 		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Bilka', '09-05-2014', -1252.20)");
 		
-		db.execSQL("CREATE TABLE " + TABLE_GOALS + " (_id integer primary key autoincrement, titel text, beloebCurrent float, beloebMål float, toSavePerMonth float, dateCreated date, )");
-		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ny Cykel', 500,  3500, 500, '2014-03-17')");
-		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål) VALUES ('Ferie Mallorca', 1600 , 8400, 400, '2014-01-07')");
+		db.execSQL("CREATE TABLE " + TABLE_GOALS + " (_id integer primary key autoincrement, titel text, beloebCurrent float, beloebMål float, toSavePerMonth float, dateCreated date )");
+		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål, toSavePerMonth, dateCreated) VALUES ('Ny Cykel', 500,  3500, 500, '2014-03-17')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål, toSavePerMonth, dateCreated) VALUES ('Ferie Mallorca', 1600 , 8400, 400, '2014-01-07')");
 		
 		db.execSQL("CREATE TABLE " + TABLE_GOALS_HISTORY + " (_id integer primary key autoincrement, titel text, beskrivelse text, dato date)");
 		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('Julegaver', 'Du sparede 750 kroner op.',  '2013-10-31')");

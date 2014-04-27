@@ -4,6 +4,7 @@ package com.example.budgetgame.frags;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,9 +24,15 @@ public class GoalFrag extends ListFragment {
 
 	
 	
-	public void setNewGoal(String titel, int beloeb, int toSave){
-		dbAdapter.setNewGoal(titel, beloeb, toSave);
+	public long setNewGoal(String titel, int beloeb, int toSave){
+		long id = dbAdapter.setNewGoal(titel, beloeb, toSave);
 		initGoals();
+		return id;
+	}
+	
+	public void setStandardAlarmForGoal(Context context, long id)
+	{
+		dbAdapter.setStandardAlarmForGoal(context, id);
 	}
 	
 	@Override
