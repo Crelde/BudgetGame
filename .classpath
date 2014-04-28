@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="C:/Users/Christian/Downloads/azuresdk-android-1.1.5(1)/mobileservices/mobileservices-1.1.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Christian/Downloads/azuresdk-android-1.1.5(1)/mobileservices/mobileservices-1.1.5-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Christian/Downloads/azuresdk-android-1.1.5(1)/mobileservices/mobileservices-1.1.5-sources.jar"/>
+	<classpathentry kind="lib" path="/BudgetGameTest/libs/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="/BudgetGameTest/libs/mobileservices-1.1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

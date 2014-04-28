@@ -1,7 +1,9 @@
 package com.example.budgetgame;
 
+import java.net.MalformedURLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.budgetgame.db.DBAdapter;
@@ -24,6 +27,16 @@ import com.example.budgetgame.frags.GoalFrag;
 import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
 import com.example.budgetgame.frags.SettingFrag;
+import com.example.external.User;
+import com.example.external.initialController;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.NextServiceFilterCallback;
+import com.microsoft.windowsazure.mobileservices.ServiceFilter;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterRequest;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.ServiceFilterResponseCallback;
+import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
 
 public class MainActivity extends Activity {
 
@@ -49,6 +62,7 @@ public class MainActivity extends Activity {
 	private EditText newGoalNameE;
 	private EditText newGoalAmountE;
 	private EditText newGoalAmountMonthE;
+	private initialController controller;
 	
 	
 	// Fragments
@@ -65,10 +79,27 @@ public class MainActivity extends Activity {
 	//Layout width
 	private int layoutWidth=320;
 	
+	public String TAG = "hej";
+	String url = "https://budgetgame.azure-mobile.net/";
+	String appkey = "zIeRvsVAjXhqWYIUYvefFFENBpvArJ90";
 	
+	ProgressBar mProgressBar;
+	private MobileServiceClient mClient;
+
+	private MobileServiceTable<User> mUserTable;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
+		initialController controller = new initialController();
+
+		controller.doStuff(this, "Crelde");
+
+		// -------------------------------------------------------------
+
+		
+		
+		// ---------------------------------------------------------
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -267,4 +298,6 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	 */
+
+	
 }
