@@ -112,7 +112,10 @@ public class DBAdapter {
 		ContentValues content = new ContentValues();
 		content.put("beloebCurrent", newAmount);
 		db.update(TABLE_GOALS, content, "_id="+goalId, null);
-		
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(System.currentTimeMillis());
+		//String year = 
+		//String dateString = cal.toString();
 		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  'Now')");
 		if(newAmount>=goal){
 			goalFinished = true;
