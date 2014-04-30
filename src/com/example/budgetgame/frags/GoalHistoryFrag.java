@@ -2,8 +2,10 @@ package com.example.budgetgame.frags;
 
 import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 import android.app.ListFragment;
+import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +15,14 @@ import android.widget.SimpleCursorAdapter;
 
 public class GoalHistoryFrag extends ListFragment {
 
+	DBAdapter dbAdapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		String[] columns = new String[] {"goalName", "historyText", "historyDate", "_id" };
-
+		String[] columns = new String[] {"titel", "beskrivelse", "dato", "_id"};
+		/*
 		MatrixCursor matrixCursor= new MatrixCursor(columns);
 		getActivity().startManagingCursor(matrixCursor);
 
@@ -27,12 +31,17 @@ public class GoalHistoryFrag extends ListFragment {
 		matrixCursor.addRow(new Object[] {"Ferie Mallorca", "Du sparede 400 kr op!", "01-04-2014", "17" });
 		matrixCursor.addRow(new Object[] {"Ferie Mallorca", "Du sparede 400 kr op!", "01-03-2014", "18" });
 		matrixCursor.addRow(new Object[] {"Ferie Mallorca", "Du sparede 400 kr op!", "01-02-2014", "21" });
-
+*/
+		dbAdapter = new DBAdapter(getActivity());
+		dbAdapter.open();
+		Cursor cursor = dbAdapter.getHistory();
+		
+		
 		SimpleCursorAdapter adapter = 
 		        new SimpleCursorAdapter(
 		        		getActivity(), 
 		        		R.layout.historyitem, 
-		        		matrixCursor, 
+		        		cursor, 
 		        		columns, 
 		        		new int[] { R.id.goalName, R.id.historyText, R.id.historyDate });
 

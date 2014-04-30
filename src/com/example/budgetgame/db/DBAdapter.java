@@ -113,7 +113,7 @@ public class DBAdapter {
 		content.put("beloebCurrent", newAmount);
 		db.update(TABLE_GOALS, content, "_id="+goalId, null);
 		
-		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  'now')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  'Now')");
 		if(newAmount>=goal){
 			goalFinished = true;
 			db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du færdigjorde dit mål om at spare "+goal+" op!',  'now')");

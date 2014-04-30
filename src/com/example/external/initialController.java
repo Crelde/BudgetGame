@@ -1,4 +1,5 @@
 package com.example.external;
+/*
 import static com.microsoft.windowsazure.mobileservices.MobileServiceQueryOperations.*;
 
 import java.net.MalformedURLException;
@@ -15,11 +16,11 @@ import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.ServiceFilterResponseCallback;
 import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
 import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
-
+*/
 
 
 public class initialController {
-
+/*
 	public String TAG = "hej";
 	String url = "https://budgetgame.azure-mobile.net/";
 	String appkey = "zIeRvsVAjXhqWYIUYvefFFENBpvArJ90";
@@ -42,5 +43,5 @@ public class initialController {
 		
 	}
 	
-	
+	*/
 }
