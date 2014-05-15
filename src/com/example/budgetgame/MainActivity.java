@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +29,7 @@ import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
 import com.example.budgetgame.frags.SettingFrag;
 import com.example.external.User;
-import com.example.external.initialController;
+import com.example.external.ServerController;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.NextServiceFilterCallback;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
 	private EditText newGoalNameE;
 	private EditText newGoalAmountE;
 	private EditText newGoalAmountMonthE;
-	private initialController controller;
+	private ServerController controller;
 	
 	
 	// Fragments
@@ -80,20 +81,16 @@ public class MainActivity extends Activity {
 	private int layoutWidth=320;
 	
 	public String TAG = "hej";
-	String url = "https://budgetgame.azure-mobile.net/";
-	String appkey = "zIeRvsVAjXhqWYIUYvefFFENBpvArJ90";
-	
+	public boolean testLogin = false;
 	ProgressBar mProgressBar;
-	private MobileServiceClient mClient;
-
-	private MobileServiceTable<User> mUserTable;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		initialController controller = new initialController();
+		ServerController controller = new ServerController();
 
-		controller.doStuff(this, "Crelde");
-
+		controller.logIn(this, "Crelde","646464");
+		
+		
 		// -------------------------------------------------------------
 
 		
@@ -146,6 +143,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				System.out.println("MainActivity says hi. " +testLogin);
 				changeFragment(FRAGMENT_SETTINGS);	
 			}
 		});

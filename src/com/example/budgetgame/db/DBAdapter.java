@@ -1,5 +1,7 @@
 package com.example.budgetgame.db;
 
+import com.example.external.Post;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -26,7 +28,9 @@ public class DBAdapter {
 	public void close() {
 		db.close();
 	}
-
+	public void insertPost(Post post){
+		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ("+post.titel+", "+post.dato+", "+post.beloeb+")");
+	}
 	public Cursor getAllPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, null, null, null, null,
 				"_id DESC");
