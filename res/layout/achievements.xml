@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+	     
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false" >
+
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_1">
+	    <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award1" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement1"
+            android:layout_below="@id/imageView1"
+            android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_2">
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award2" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement2"
+            android:layout_below="@id/imageView2"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_3">
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award3" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement3"
+            android:layout_below="@id/imageView3"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+
+      
+
+    </LinearLayout>
+
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false" >
+
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_4">
+	    <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award4" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement4"
+            android:layout_below="@id/imageView4"
+            android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_5">
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award5" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement5"
+            android:layout_below="@id/imageView5"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_6">
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award6" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement6"
+            android:layout_below="@id/imageView6"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+    </LinearLayout>
+    
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false" >
+
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_7">
+	    <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award7" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement7"
+            android:layout_below="@id/imageView7"
+            android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_8">
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award8" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement8"
+            android:layout_below="@id/imageView8"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+        
+		<RelativeLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:id="@+id/award_9">
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_award9" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement9"
+            android:layout_below="@id/imageView9"
+            android:layout_centerHorizontal="true"/>/>
+        </RelativeLayout>
+
+    </LinearLayout>
+       
+	</LinearLayout>
+</ScrollView>

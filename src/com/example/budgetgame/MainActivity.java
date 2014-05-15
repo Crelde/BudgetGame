@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.budgetgame.db.DBAdapter;
+import com.example.budgetgame.frags.AchievementFrag;
 import com.example.budgetgame.frags.GoalFrag;
 import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
 	private ImageButton postsButton;
 	private ImageButton goalsButton;
 	private ImageButton settingsButton;
+	private ImageButton achievementsButton;
 	
 	// Filter Controls
 	private Button filterOK;
@@ -56,11 +58,13 @@ public class MainActivity extends Activity {
 	OverviewFrag overfrag = new OverviewFrag();
 	GoalFrag goalfrag = new GoalFrag();
 	SettingFrag settingfrag = new SettingFrag();
+	AchievementFrag achievefrag = new AchievementFrag();
 	
 	public static final int FRAGMENT_HOME = 1;
 	public static final int FRAGMENT_GOALS = 2;
 	public static final int FRAGMENT_SETTINGS = 3;
 	public static final int FRAGMENT_POSTS = 4;
+	public static final int FRAGMENT_ACHIEVEMENTS = 5;
 	
 	//Layout width
 	private int layoutWidth=320;
@@ -77,6 +81,7 @@ public class MainActivity extends Activity {
 		postsButton = (ImageButton) findViewById(R.id.postsButton);
 		goalsButton = (ImageButton) findViewById(R.id.goalsButton);
 		settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+		achievementsButton = (ImageButton) findViewById(R.id.achievementButton);
 	
 		// Initial adding of the overview fragment.
 		if (savedInstanceState == null)
@@ -118,6 +123,15 @@ public class MainActivity extends Activity {
 				changeFragment(FRAGMENT_SETTINGS);	
 			}
 		});
+		
+		achievementsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				changeFragment(FRAGMENT_ACHIEVEMENTS);
+				
+			}
+		});
 
 		
 	}
@@ -144,6 +158,8 @@ public class MainActivity extends Activity {
 		else if (fragment == FRAGMENT_GOALS) ft.replace(R.id.FragmentContainer, goalfrag);
 		
 		else if (fragment == FRAGMENT_SETTINGS) ft.replace(R.id.FragmentContainer, settingfrag);
+		
+		else if (fragment == FRAGMENT_ACHIEVEMENTS) ft.replace(R.id.FragmentContainer, achievefrag);
 			
 		else { /* Error situation*/ }
 		
@@ -164,6 +180,9 @@ public class MainActivity extends Activity {
 		
 		if (fragment == FRAGMENT_SETTINGS) settingsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
 		else settingsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+		
+		if (fragment == FRAGMENT_ACHIEVEMENTS) achievementsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
+		else achievementsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
 	}
 
 

@@ -21,6 +21,7 @@ public class DBAdapter {
 	String TABLE_POSTS = "Posteringer";
 	String TABLE_GOALS = "Goals";
 	String TABLE_GOALS_HISTORY = "History";
+	String TABLE_ACHIEVEMENTS = "Achievement";
 
 	public DBAdapter(Context context) {
 		helper = new DBHelper(context);
@@ -56,6 +57,12 @@ public class DBAdapter {
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål" }, null, null, null, null,
 				"_id DESC");
 		return query;
+	}
+	
+	public Cursor getAchievements(){
+		Cursor query = db.query(TABLE_ACHIEVEMENTS, new String[] { "_id", "titel", "beskrivelse", "klaret" }, null, null, null, null,
+				"_id DESC");
+		return query;			
 	}
 	
 	// Sets new goal and returns updated cursor 
@@ -143,7 +150,6 @@ public class DBAdapter {
 		
 		alarmManager.set(AlarmManager.RTC_WAKEUP,  startDate.getTimeInMillis(), pendingIntent);
 	}
-	
 	
 	
 	
