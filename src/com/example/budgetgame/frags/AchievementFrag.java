@@ -27,6 +27,6 @@ public class AchievementFrag extends Fragment {
 		
 		RelativeLayout award1 = (RelativeLayout) getActivity().findViewById(R.id.award_1);
 		
-		//award1.setOnClickListener(l)
+		//award1.setOnClickListener(l) // Comment for fun
 	}
 }
