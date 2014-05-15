@@ -24,13 +24,18 @@
             android:id="@+id/imageView1"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award1" />
-        <TextView 
+            android:src="@drawable/icon_award1"
+            android:alpha="0.2" />
+
+        <TextView
+            android:id="@+id/textview_award1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Achievement1"
             android:layout_below="@id/imageView1"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:text="Achievement1"
+            android:gravity="center" />
+
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -42,13 +47,16 @@
             android:id="@+id/imageView2"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award2" />
+            android:src="@drawable/icon_award2"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement2"
+            android:id="@+id/textview_award2"
             android:layout_below="@id/imageView2"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -60,13 +68,16 @@
             android:id="@+id/imageView3"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award3" />
+            android:src="@drawable/icon_award3"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement3"
+            android:id="@+id/textview_award3"
             android:layout_below="@id/imageView3"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
 
       
@@ -89,13 +100,16 @@
             android:id="@+id/imageView4"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award4" />
+            android:src="@drawable/icon_award4"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement4"
+            android:id="@+id/textview_award4"
             android:layout_below="@id/imageView4"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -107,13 +121,16 @@
             android:id="@+id/imageView5"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award5" />
+            android:src="@drawable/icon_award5"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement5"
+            android:id="@+id/textview_award5"
             android:layout_below="@id/imageView5"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -125,13 +142,16 @@
             android:id="@+id/imageView6"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award6" />
+            android:src="@drawable/icon_award6"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement6"
+            android:id="@+id/textview_award6"
             android:layout_below="@id/imageView6"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
     </LinearLayout>
     
@@ -151,13 +171,16 @@
             android:id="@+id/imageView7"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award7" />
+            android:src="@drawable/icon_award7"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement7"
+            android:id="@+id/textview_award7"
             android:layout_below="@id/imageView7"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -169,13 +192,16 @@
             android:id="@+id/imageView8"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award8" />
+            android:src="@drawable/icon_award8"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement8"
+            android:id="@+id/textview_award8"
             android:layout_below="@id/imageView8"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -187,13 +213,16 @@
             android:id="@+id/imageView9"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:src="@drawable/icon_award9" />
+            android:src="@drawable/icon_award9"
+            android:alpha="0.2" />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Achievement9"
+            android:id="@+id/textview_award9"
             android:layout_below="@id/imageView9"
-            android:layout_centerHorizontal="true"/>/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
         </RelativeLayout>
 
     </LinearLayout>

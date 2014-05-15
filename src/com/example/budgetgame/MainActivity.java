@@ -11,6 +11,8 @@ import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -141,6 +143,9 @@ public class MainActivity extends Activity {
 	private void defineLayoutWidth(int width){
 		layoutWidth = width;
 	}
+	
+	
+	
 	
 	
 	public void changeFragment(int fragment){
@@ -278,12 +283,12 @@ public class MainActivity extends Activity {
 	}*/
 	
 	
-	/* We are not, as of yet, using the options menu.
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	 */
+	 
 }

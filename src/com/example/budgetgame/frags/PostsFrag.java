@@ -78,6 +78,12 @@ public class PostsFrag extends ListFragment {
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		getActivity().setTitle("Posteringer");
+	}
+	
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		dbAdapter.close();

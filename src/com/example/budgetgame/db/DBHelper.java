@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
-	public static final int DB_VERSION = 10;
+	public static final int DB_VERSION = 12;
 	public static final String DB_POSTS = "budget";
 	public static final String APP_POSTS = "BudgetApp";
 	public static final String TABLE_POSTS = "Posteringer";
@@ -53,14 +53,14 @@ public class DBHelper extends SQLiteOpenHelper {
 		achievement1.put("klaret", 0);
 		
 		ContentValues achievement2 = new ContentValues();
-		achievement1.put("titel", "Færdiggør mål");
-		achievement1.put("beskrivelse", "For at opnå denne medalje, skal du færdiggøre et mål, du har sat for dig selv.");
-		achievement1.put("klaret", 0);
+		achievement2.put("titel", "Færdiggør mål");
+		achievement2.put("beskrivelse", "For at opnå denne medalje, skal du færdiggøre et mål, du har sat for dig selv.");
+		achievement2.put("klaret", 0);
 		
 		ContentValues achievement3 = new ContentValues();
-		achievement1.put("titel", "Færdiggør større mål");
-		achievement1.put("beskrivelse", "For at opnå denne medalje, skal du færdiggøre et mål på over 500 kr, du har sat for dig selv.");
-		achievement1.put("klaret", 0);
+		achievement3.put("titel", "Færdiggør større mål");
+		achievement3.put("beskrivelse", "For at opnå denne medalje, skal du færdiggøre et mål på over 500 kr, du har sat for dig selv.");
+		achievement3.put("klaret", 0);
 		
 		db.insert(TABLE_ACHIEVEMENTS, null, achievement1);
 		db.insert(TABLE_ACHIEVEMENTS, null, achievement2);

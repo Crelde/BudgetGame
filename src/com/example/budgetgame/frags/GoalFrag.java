@@ -46,6 +46,7 @@ public class GoalFrag extends ListFragment {
 	public void onResume() {
 		super.onResume();
 		
+		getActivity().setTitle("Mål");
 		Button goalHistoryButton = (Button) getActivity().findViewById(R.id.goalHistoryButton);
 		goalHistoryButton.setOnClickListener(new OnClickListener() {
 		

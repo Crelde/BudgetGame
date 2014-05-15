@@ -71,6 +71,8 @@ public class DBAdapter {
 		return query;			
 	}
 	
+	
+	
 	// Sets new goal and returns updated cursor 
 	// Is the return used? Doesnt look like it -Kewin
 	public long setNewGoal(String titel, int mål, int prMonth){

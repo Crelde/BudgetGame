@@ -19,5 +19,12 @@ public class SettingFrag extends Fragment {
 		return v;
 	}
 	
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		getActivity().setTitle("Indstillinger");
+	}
+	
 
 }
