@@ -3,6 +3,7 @@ package com.example.budgetgame.db;
 import java.util.Calendar;
 
 import com.example.budgetgame.SavingsAlarmReceiver;
+import com.example.external.Post;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -34,6 +35,11 @@ public class DBAdapter {
 
 	public void close() {
 		db.close();
+	}
+
+
+	public void insertPost(Post post){
+		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ("+post.titel+", "+post.dato+", "+post.beloeb+")");
 	}
 
 	public Cursor getAllPosts(){
