@@ -8,20 +8,23 @@
         android:id="@+id/titel"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.34"
         android:gravity="left"
         android:text="" />
 
     <TextView
         android:id="@+id/dato"
-        android:layout_width="82dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.33"
         android:gravity="center"
-        android:text="" /> 
+        android:text="" />
 
     <TextView
         android:id="@+id/beloeb"
-        android:layout_width="match_parent"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.14"
         android:gravity="right"
         android:text="" />
 

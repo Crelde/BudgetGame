@@ -40,7 +40,11 @@ public class DBAdapter {
 
 
 	public void insertPost(Post post){
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ("+post.titel+", "+post.dato+", "+post.beloeb+")");
+		ContentValues values = new ContentValues();
+		values.put("titel", post.titel);
+		values.put("dato", post.dato.substring(0,10));
+		values.put("beloeb", post.beloeb);
+		db.insert(TABLE_POSTS, null, values);
 	}
 
 	public Cursor getAllPosts(){

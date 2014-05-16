@@ -89,30 +89,30 @@ public class ServerController {
 	}
 	public void syncPosts(Context context, final String name){
 		
+		dbAdapter = new DBAdapter(context);
+		
 		try {
 			mClient = new MobileServiceClient(url, appkey, context);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		mClient.invokeApi("Budget?userNameToGetPostsFor="+name,
-				new ApiJsonOperationCallback() {
-					@Override
-					public void onCompleted(JsonElement jsonData, Exception error,
-							ServiceFilterResponse response) {
-						
-					}
-				});
+		// Doesn't even use ^ method
 		mPostTable = mClient.getTable(Post.class);	
 		mPostTable.execute(new TableQueryCallback<Post>() {
 			public void onCompleted(List<Post> result, int count, Exception exception, ServiceFilterResponse response) {
+				String nameToTestAgainst = name;
 				System.out.println("BEFORE IF");
 				if (exception == null) {
 					System.out.println("AFTER IF");
+					dbAdapter.open();
+					dbAdapter.clearPosts();
 					for (Post item : result) {
-						if (item.username == name){
+						if ((item.username.compareTo(nameToTestAgainst) == 0)){						
 							dbAdapter.insertPost(item);
 						}
 					}
+					dbAdapter.close();
+					
 				}
 				else{
 					exception.printStackTrace();

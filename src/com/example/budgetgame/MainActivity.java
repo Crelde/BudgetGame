@@ -136,7 +136,8 @@ public class MainActivity extends Activity {
 			}
 		};
 	//	controller.getSaldoForUser(this, "test1", listener);
-		controller.logIn(this, "test1", "646464", listener);
+		controller.syncPosts(this, "test1");
+		//controller.logIn(this, "test1", "646464", listener);
 					
 		// Implementations of button onclicks so they change between the fragments
 		homeButton.setOnClickListener(new OnClickListener() {
