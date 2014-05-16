@@ -68,6 +68,20 @@ public class DBAdapter {
 	public Cursor getAchievements(){
 		Cursor query = db.query(TABLE_ACHIEVEMENTS, new String[] { "_id", "titel", "beskrivelse", "klaret" }, null, null, null, null,
 				"_id DESC");
+		
+		/*
+		query.moveToFirst();
+		System.out.println("DB PRINTS------");
+		System.out.println("columns:"+query.getColumnCount());
+		System.out.println(query.getInt(0));
+		System.out.println("DB PRINTS------");
+		query.moveToLast();
+		System.out.println("DB PRINTS------");
+		System.out.println("columns:"+query.getColumnCount());
+		System.out.println(query.getInt(0));
+		System.out.println("DB PRINTS------");
+		*/
+		
 		return query;			
 	}
 	
@@ -83,7 +97,12 @@ public class DBAdapter {
 		values.put("toSavePerMonth", prMonth);
 		values.put("dateCreated", "now");
 		long id = db.insert(TABLE_GOALS, null, values);
-		//db.execSQL("INSERT INTO " + TABLE_GOALS+ " (titel, beloebCurrent, beloebMål, toSavePerMonth, dateCreated ) VALUES ('"+titel+"', 0, "+mål+","+prMonth+","+"now"+")");
+		
+		// Achievement 1 completion
+		ContentValues achievement = new ContentValues();
+		achievement.put("klaret", 1);
+		System.out.println("opdaterede så mange rows:"+ db.update(TABLE_ACHIEVEMENTS, achievement, "_id=1", null));
+		
 		return id;
 	}
 	
@@ -116,7 +135,18 @@ public class DBAdapter {
 		float goal = query.getFloat(3);
 		query.close();
 		
-		boolean finished = goalChangeDb(goalId, title, current, goal, sum);		
+		boolean finished = goalChangeDb(goalId, title, current, goal, sum);	
+		
+		
+		ContentValues achievement = new ContentValues();
+		achievement.put("klaret", 1);
+		// Achievement 2 completion
+		if (finished) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=2", null);
+		// Achievement 3 completion
+		if (finished && goal>=500) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=3", null);
+		
+		
+		
 		return finished;
 	}
 	

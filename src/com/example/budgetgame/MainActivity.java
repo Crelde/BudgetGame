@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.budgetgame.db.DBAdapter;
@@ -45,9 +48,20 @@ public class MainActivity extends Activity {
 	private CheckBox checkpos;
 	private CheckBox checkneg;
 	private Dialog postsDialog;
-	private Dialog newGoalDialog;
+	
+	
+	// awardControls
+	private Dialog awardDialog;
+	private TextView awardTitle;
+	private TextView awardDesc;
+	private ImageView awardAchievedImage;
+	private Button awardOkButton;
+	static final String TITLE = "titel";
+	static final String DESC = "beskrivelse";
+	static final String ACHIEVED = "klaret";
 	
 	//New goal controls
+	private Dialog newGoalDialog;
 	private Button acceptGoalButton;
 	private Button cancelNewGoalButton;
 	private EditText newGoalNameE;
@@ -188,6 +202,30 @@ public class MainActivity extends Activity {
 		
 		if (fragment == FRAGMENT_ACHIEVEMENTS) achievementsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
 		else achievementsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+	}
+	
+	public void ShowAwardDialog(ContentValues award){
+		awardDialog = new Dialog(MainActivity.this);
+		awardDialog.setContentView(R.layout.achievementdialog);
+		awardDialog.setTitle("Medaljebeskrivelse");
+		awardDialog.show();
+		awardAchievedImage = (ImageView)awardDialog.findViewById(R.id.awardDialogImage);
+		awardTitle = (TextView)awardDialog.findViewById(R.id.awardDialogTitleView);
+		awardDesc = (TextView)awardDialog.findViewById(R.id.awardDialogDesc);
+		awardOkButton = (Button)awardDialog.findViewById(R.id.awardDialogOkButton);
+		
+		awardTitle.setText(award.getAsString(TITLE));
+		awardDesc.setText(award.getAsString(DESC));
+		if (award.getAsInteger(ACHIEVED)==1) awardAchievedImage.setImageDrawable(getResources().getDrawable(R.drawable.icon_yes));
+		
+		awardOkButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				awardDialog.dismiss();
+				
+			}
+		});
 	}
 
 

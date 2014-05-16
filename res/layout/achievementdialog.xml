@@ -1,7 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent" 
+    >
 
-</RelativeLayout>
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="399dp" >
+	
+	    <TextView
+	        android:id="@+id/awardDialogAchievedText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/awardDialogTitleView"
+	        android:layout_marginTop="38dp"
+	        android:text="Opnået:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/Text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/awardDialogAchievedText"
+	        android:layout_marginTop="35dp"
+	        android:text="Beskrivelse:"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/awardDialogTitleView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginTop="13dp"
+	        android:text="TITLE"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	    <ImageView
+	        android:id="@+id/awardDialogImage"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/awardDialogAchievedText"
+	        android:layout_toRightOf="@+id/Text"
+	        android:src="@drawable/icon_no" />
+
+	    <Button
+	        android:id="@+id/awardDialogOkButton"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@+id/awardDialogImage"
+	        android:layout_below="@+id/awardDialogDesc"
+	        android:layout_marginTop="47dp"
+	        android:text="Ok" />
+
+	    <TextView
+	        android:id="@+id/awardDialogDesc"
+	        android:layout_width="250dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/Text"
+	        android:text="Lorem ipsum bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+	</RelativeLayout>
+
+</ScrollView>

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,10 +24,13 @@ public class AchievementFrag extends Fragment {
 	static final String DESC = "beskrivelse";
 	static final String ACHIEVED = "klaret";
 	
+	MainActivity mainActivity;
+	
 	// Contents of used achievements
 	ContentValues awardValue_1;
 	ContentValues awardValue_2;
 	ContentValues awardValue_3;
+	ContentValues awardValue_none;
 	
 	//TextViews for achievements
 	TextView awardText_1;
@@ -100,6 +104,7 @@ public class AchievementFrag extends Fragment {
 		awardValue_1 = new ContentValues();
 		awardValue_2 = new ContentValues();
 		awardValue_3 = new ContentValues();
+		awardValue_none = new ContentValues();
 		
 		awardValue_3.put(TITLE, achievements.getString(1));
 		awardValue_3.put(DESC, achievements.getString(2));
@@ -120,6 +125,11 @@ public class AchievementFrag extends Fragment {
 		achievements.close();
 		
 		dbAdapter.close();
+		
+		awardValue_none.put(TITLE, "Findes ikke");
+		awardValue_none.put(DESC, "Medaljen kan ikke opnås.");
+		awardValue_none.put(ACHIEVED, 0);
+		
 		
 
 	}
@@ -171,12 +181,57 @@ public class AchievementFrag extends Fragment {
 		initAchievementViews();
 		checkAchievementStatus();
 		
+		mainActivity = (MainActivity) getActivity();
+				
+		
 		awardText_1.setText(awardValue_1.getAsString(TITLE));
 		awardText_2.setText(awardValue_2.getAsString(TITLE));
 		awardText_3.setText(awardValue_3.getAsString(TITLE));
 		
-		// On click layouts
-				RelativeLayout award1 = (RelativeLayout) getActivity().findViewById(R.id.award_1);
+		
+		// OnClickListeners for awards
+		awardLayout_1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mainActivity.ShowAwardDialog(awardValue_1);
+			}
+		});
+		
+		awardLayout_2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mainActivity.ShowAwardDialog(awardValue_2);				
+			}
+		});
+		
+		awardLayout_3.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mainActivity.ShowAwardDialog(awardValue_3);				
+			}
+		});
+		
+		OnClickListener noAwardClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mainActivity.ShowAwardDialog(awardValue_none);	
+				
+			}
+		};
+		
+		awardLayout_4.setOnClickListener(noAwardClickListener);
+		awardLayout_5.setOnClickListener(noAwardClickListener);
+		awardLayout_6.setOnClickListener(noAwardClickListener);
+		awardLayout_7.setOnClickListener(noAwardClickListener);
+		awardLayout_8.setOnClickListener(noAwardClickListener);
+		awardLayout_9.setOnClickListener(noAwardClickListener);
+			
+		
+	
 				
 				
 				//awardLayout_1.setBackground(awardedBackground);
