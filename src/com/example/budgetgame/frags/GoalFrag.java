@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.example.budgetgame.MainActivity;
@@ -38,7 +41,12 @@ public class GoalFrag extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dbAdapter = new DBAdapter(getActivity());
+		dbAdapter.open();
 		initGoals();
+		
+		
+		
 		
 	}
 	
@@ -47,6 +55,21 @@ public class GoalFrag extends ListFragment {
 		super.onResume();
 		
 		getActivity().setTitle("Mål");
+		
+		//OnItemClickListener
+		ListView list = (ListView) getActivity().findViewById(android.R.id.list);		
+		System.out.println(list.toString());
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				//((MainActivity) getActivity()).makeToast("you clicked id:"+id);
+				Cursor goal = dbAdapter.getGoal(id);
+				((MainActivity) getActivity()).ShowEditGoalDialog(goal);
+				
+			                
+			            }
+			        });
+		
 		Button goalHistoryButton = (Button) getActivity().findViewById(R.id.goalHistoryButton);
 		goalHistoryButton.setOnClickListener(new OnClickListener() {
 		
@@ -61,8 +84,6 @@ public class GoalFrag extends ListFragment {
 	});
 	}
 	public void initGoals(){
-		dbAdapter = new DBAdapter(getActivity());
-		dbAdapter.open();
 		Cursor c = dbAdapter.getAllGoals();
 		getActivity().startManagingCursor(c);
 		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
@@ -79,6 +100,8 @@ public class GoalFrag extends ListFragment {
 		((MainActivity) getActivity()).setActiveFragment(MainActivity.FRAGMENT_GOALS);
 		return inflater.inflate(R.layout.goals, container, false);
 	}
+	
+	
 
 	
 	@Override

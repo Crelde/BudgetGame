@@ -1,6 +1,7 @@
 package com.example.budgetgame.db;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import com.example.budgetgame.SavingsAlarmReceiver;
 import com.example.external.Post;
@@ -65,6 +66,11 @@ public class DBAdapter {
 		return query;
 	}
 	
+	public Cursor getGoal(long id){
+		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål", "toSavePerMonth", "dateCreated" }, "_id="+id, null, null, null, null);
+		return query;
+	}
+	
 	public Cursor getAchievements(){
 		Cursor query = db.query(TABLE_ACHIEVEMENTS, new String[] { "_id", "titel", "beskrivelse", "klaret" }, null, null, null, null,
 				"_id DESC");
@@ -95,7 +101,11 @@ public class DBAdapter {
 		values.put("beloebCurrent", 0);
 		values.put("beloebMål", mål);
 		values.put("toSavePerMonth", prMonth);
-		values.put("dateCreated", "now");
+		Calendar date = Calendar.getInstance();
+		int day = date.get(Calendar.DAY_OF_MONTH);
+		int month = date.get(Calendar.MONTH);
+		int year = date.get(Calendar.YEAR);
+		values.put("dateCreated", day+"-"+month+"-"+year);
 		long id = db.insert(TABLE_GOALS, null, values);
 		
 		// Achievement 1 completion
@@ -104,6 +114,17 @@ public class DBAdapter {
 		System.out.println("opdaterede så mange rows:"+ db.update(TABLE_ACHIEVEMENTS, achievement, "_id=1", null));
 		
 		return id;
+	}
+	
+	public boolean deleteGoal(int id){
+		if (db.delete(TABLE_GOALS, "_id="+id, null)==1) return true;
+		else return false;		
+	}
+	
+	public boolean updateGoal(ContentValues goal){
+		
+		
+		return true;
 	}
 	
 	

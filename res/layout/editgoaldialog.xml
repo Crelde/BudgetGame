@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/editGoalDialogTitle"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="TITLE"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/eGGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editGoalDialogTitle"
+            android:layout_marginTop="18dp"
+            android:text="Mål:"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+        <EditText
+            android:id="@+id/editGoalDialogGoal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/eGGoal"
+            android:layout_alignBottom="@+id/eGGoal"
+            android:layout_toRightOf="@+id/eGSaving"
+            android:ems="10"
+            android:inputType="number" >
+
+            
+        </EditText>
+
+        <EditText
+            android:id="@+id/editGoalDialogSaved"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/eGSaved"
+            android:layout_alignBottom="@+id/eGSaved"
+            android:layout_alignLeft="@+id/editGoalDialogGoal"
+            android:ems="10"
+            android:inputType="none" />
+
+        <EditText
+            android:id="@+id/editGoalDialogSaving"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/eGSaving"
+            android:layout_alignRight="@+id/editGoalDialogSaved"
+            android:ems="10"
+            android:inputType="number" />
+
+        <ProgressBar
+            android:id="@+id/editGoalDialogProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editGoalDialogTitle"
+            android:layout_toRightOf="@+id/editGoalDialogTitle" />
+
+        <ImageView
+            android:id="@+id/editGoalDialogLine"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/eGSaving"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/icon_separation_line" />
+
+        <TextView
+            android:id="@+id/eGExtra"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editGoalDialogLine"
+            android:layout_marginTop="28dp"
+            android:text="Sæt ekstra penge til side:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editGoalDialogGoal"
+            android:layout_toRightOf="@+id/editGoalDialogGoal"
+            android:text="kr."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/eGSaving"
+            android:layout_toRightOf="@+id/editGoalDialogSaved"
+            android:text="kr."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/editGoalDialogPutAside"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/eGExtra"
+            android:layout_toRightOf="@+id/eGExtra"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/editGoalDialogSaveButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editGoalDialogDeleteButton"
+            android:layout_alignBottom="@+id/editGoalDialogDeleteButton"
+            android:layout_alignRight="@+id/editGoalDialogProgress"
+            android:text="Gem mål" />
+
+        <Button
+            android:id="@+id/editGoalDialogDeleteButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/eGExtra"
+            android:layout_marginTop="58dp"
+            android:text="Slet mål" />
+
+        <TextView
+            android:id="@+id/editGoalDialogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/eGSaving"
+            android:layout_marginTop="28dp"
+            android:text="Date"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/eGSaved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editGoalDialogGoal"
+            android:layout_marginTop="34dp"
+            android:text="Opsparet:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/eGSaving"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editGoalDialogSaved"
+            android:layout_marginTop="36dp"
+            android:text="Sæt til side hver månede:"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editGoalDialogSaving"
+            android:layout_alignBottom="@+id/editGoalDialogSaving"
+            android:layout_alignLeft="@+id/TextView01"
+            android:text="kr."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editGoalDialogPutAside"
+            android:layout_alignBottom="@+id/editGoalDialogPutAside"
+            android:layout_alignLeft="@+id/TextView02"
+            android:text="kr."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </RelativeLayout>
+    
+
+</ScrollView>

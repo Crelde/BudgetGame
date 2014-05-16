@@ -37,6 +37,7 @@ public class GoalHistoryFrag extends ListFragment {
 		Cursor cursor = dbAdapter.getHistory();
 		
 		
+		
 		SimpleCursorAdapter adapter = 
 		        new SimpleCursorAdapter(
 		        		getActivity(), 
@@ -45,7 +46,9 @@ public class GoalHistoryFrag extends ListFragment {
 		        		columns, 
 		        		new int[] { R.id.goalName, R.id.historyText, R.id.historyDate });
 
-		setListAdapter(adapter);		
+		setListAdapter(adapter);	
+		dbAdapter.close();
+		cursor.close();
 	}
 	@Override
 	public void onResume() {

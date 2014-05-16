@@ -11,6 +11,7 @@ import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,6 @@ import com.example.budgetgame.frags.SettingFrag;
 
 public class MainActivity extends Activity {
 
-	private String posttag = "POST_TAG";
 	DBAdapter dbAdapter;
 	// Buttons
 	private ImageButton homeButton;
@@ -67,6 +68,18 @@ public class MainActivity extends Activity {
 	private EditText newGoalNameE;
 	private EditText newGoalAmountE;
 	private EditText newGoalAmountMonthE;
+	
+	//Edit goal controls
+	private Dialog editGoalDialog;
+	private TextView goalTitle;
+	private TextView dateText;
+	private EditText goalSum;
+	private EditText savedCurrent;
+	private EditText savePerMonth;
+	private EditText putAsideSum;
+	private ProgressBar progress;
+	private Button deleteButton;
+	private Button saveButton;
 	
 	
 	// Fragments
@@ -154,13 +167,6 @@ public class MainActivity extends Activity {
 	
 	public void makeToast(String toast){ Toast.makeText(this, toast, Toast.LENGTH_SHORT).show(); }
 	
-	private void defineLayoutWidth(int width){
-		layoutWidth = width;
-	}
-	
-	
-	
-	
 	
 	public void changeFragment(int fragment){
 		
@@ -202,6 +208,66 @@ public class MainActivity extends Activity {
 		
 		if (fragment == FRAGMENT_ACHIEVEMENTS) achievementsButton.setBackgroundColor(getResources().getColor(R.color.darkGreen));
 		else achievementsButton.setBackgroundColor(getResources().getColor(R.color.lightGreen));
+	}
+
+	public void ShowEditGoalDialog(Cursor goal){
+		editGoalDialog = new Dialog(MainActivity.this);
+		editGoalDialog.setContentView(R.layout.editgoaldialog);
+		editGoalDialog.setTitle("Mål");
+		editGoalDialog.show();
+
+		// Cursor fields
+		goal.moveToFirst();
+		String title = goal.getString(1);
+		float goalFloat = goal.getFloat(3);
+		float current = goal.getFloat(2);
+		float perMonth = goal.getFloat(4);
+		String dateCreated = goal.getString(5);
+		final int goalId = goal.getInt(0);
+		
+		// Initialize views
+		goalTitle = (TextView) editGoalDialog.findViewById(R.id.editGoalDialogTitle);
+		goalSum = (EditText) editGoalDialog.findViewById(R.id.editGoalDialogGoal);
+		savedCurrent = (EditText) editGoalDialog.findViewById(R.id.editGoalDialogSaved);
+		savePerMonth = (EditText) editGoalDialog.findViewById(R.id.editGoalDialogSaving);
+		putAsideSum = (EditText) editGoalDialog.findViewById(R.id.editGoalDialogPutAside);
+		progress = (ProgressBar) editGoalDialog.findViewById(R.id.editGoalDialogProgress);
+		deleteButton = (Button) editGoalDialog.findViewById(R.id.editGoalDialogDeleteButton);
+		saveButton = (Button) editGoalDialog.findViewById(R.id.editGoalDialogSaveButton);
+		dateText = (TextView) editGoalDialog.findViewById(R.id.editGoalDialogDate);
+	
+		// Set view Parameters
+		goalTitle.setText(title);
+		goalSum.setText(""+goalFloat);
+		savedCurrent.setText(""+current);
+		savedCurrent.setEnabled(false);
+		savePerMonth.setText(""+perMonth);
+		progress.setMax((int) goalFloat);
+		progress.setProgress((int) current);
+		dateText.setText("Oprettet d. " + dateCreated);
+		
+		// OnClickListenes
+		deleteButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TEST KEWIN
+				dbAdapter.deleteGoal(goalId);
+				editGoalDialog.dismiss();
+				goalfrag.initGoals();
+			}
+		});
+		
+		saveButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// DO THIS KEWIN
+				//dbAdapter.updateGoal(goal)
+			}
+		});
+		
+		
 	}
 	
 	public void ShowAwardDialog(ContentValues award){
@@ -326,7 +392,15 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		dbAdapter = new DBAdapter(this);
+		dbAdapter.open();
 		return true;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbAdapter.close();
 	}
 	 
 }
