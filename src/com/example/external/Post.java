@@ -1,10 +1,9 @@
 package com.example.external;
 
-import java.util.Date;
-
 public class Post {
+	String id;
 	public String titel;
-	public Date dato;
+	public String dato;
 	public double beloeb;
 	public String username;
 	

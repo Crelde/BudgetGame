@@ -32,6 +32,7 @@ import com.example.budgetgame.frags.GoalFrag;
 import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
 import com.example.budgetgame.frags.SettingFrag;
+import com.example.external.ServerController;
 
 public class MainActivity extends Activity {
 
@@ -97,7 +98,8 @@ public class MainActivity extends Activity {
 	
 	//Layout width
 	private int layoutWidth=320;
-	
+	ServerController controller;
+	onTaskCompleted listener;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +119,24 @@ public class MainActivity extends Activity {
 		{
 			changeFragment(FRAGMENT_HOME); 	
 		}
-		
-		
+		controller = new ServerController();
+	
+		listener = new onTaskCompleted() {
+			
+			@Override
+			public void getSaldoTaskCompleted(double saldo) {
+				System.out.println("Saldo: "+saldo);
+				
+			}
+			
+			@Override
+			public void getLogInTaskCompleted(boolean login) {
+				System.out.println("Login: "+login);
+				
+			}
+		};
+	//	controller.getSaldoForUser(this, "test1", listener);
+		controller.logIn(this, "test1", "646464", listener);
 					
 		// Implementations of button onclicks so they change between the fragments
 		homeButton.setOnClickListener(new OnClickListener() {
