@@ -5,21 +5,12 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.ProgressBar;
-
 import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceQuery;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
-import com.microsoft.windowsazure.mobileservices.NextServiceFilterCallback;
-import com.microsoft.windowsazure.mobileservices.ServiceFilter;
-import com.microsoft.windowsazure.mobileservices.ServiceFilterRequest;
 import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
-import com.microsoft.windowsazure.mobileservices.ServiceFilterResponseCallback;
-import com.microsoft.windowsazure.mobileservices.TableOperationCallback;
 import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
-
-import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.onTaskCompleted;
 import com.example.budgetgame.db.DBAdapter;
 import com.google.gson.*;
@@ -38,8 +29,6 @@ public class ServerController {
 	onTaskCompleted listener;
 	
 	private MobileServiceClient mClient;
-
-	//private MobileServiceTable<User> mUserTable;
 	private MobileServiceTable<Post> mPostTable;
 
 	public void logIn(final Context context, final String username, String password, final onTaskCompleted listener){
@@ -66,8 +55,6 @@ public class ServerController {
 					}
 				});		
 	}
-	
-	
 	public void getSaldoForUser(Context context, String username, final onTaskCompleted listener)
 	{
 		this.listener = listener;
@@ -91,28 +78,25 @@ public class ServerController {
 				});
 	}
 	public void syncPosts(Context context, final String name){
-		
-		dbAdapter = new DBAdapter(context);
-		
 		try {
 			mClient = new MobileServiceClient(url, appkey, context);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		// Doesn't even use ^ method
-		mPostTable = mClient.getTable(Post.class);	
-		mPostTable.execute(new TableQueryCallback<Post>() {
+		// invoke Log-in method from server
+		
+		dbAdapter = new DBAdapter(context);
+		mPostTable = mClient.getTable(Post.class);
+		MobileServiceQuery<TableQueryCallback<Post>> msq = mPostTable.top(500);
+		msq.endsWith("username", name).execute(new TableQueryCallback<Post>() {
 			public void onCompleted(List<Post> result, int count, Exception exception, ServiceFilterResponse response) {
-				String nameToTestAgainst = name;
 				System.out.println("BEFORE IF");
 				if (exception == null) {
 					System.out.println("AFTER IF");
 					dbAdapter.open();
 					dbAdapter.clearPosts();
-					for (Post item : result) {
-						if ((item.username.compareTo(nameToTestAgainst) == 0)){						
-							dbAdapter.insertPost(item);
-						}
+					for (Post item : result) {					
+						dbAdapter.insertPost(item);
 					}
 					dbAdapter.close();
 					

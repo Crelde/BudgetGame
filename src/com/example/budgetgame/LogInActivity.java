@@ -3,17 +3,15 @@ package com.example.budgetgame;
 import com.example.external.ServerController;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 public class LogInActivity extends Activity {
 	
@@ -22,6 +20,8 @@ public class LogInActivity extends Activity {
 	private EditText userNameEdit;
 	private EditText passWordEdit;
 	private Context ctx;
+	private Dialog failedLoginDialog;
+	private Button loginOK;
 	
 	onTaskCompleted listener;
 	ServerController controller;
@@ -55,6 +55,10 @@ public class LogInActivity extends Activity {
 					intent.putExtra("userName", userNameEdit.getText().toString());
 					startActivity(intent);
 				}
+				else{
+					View v = new View(ctx);
+					showFailedLoginDialog(v);
+				}
 				
 			}
 		};
@@ -73,6 +77,26 @@ public class LogInActivity extends Activity {
 			}
 		});
 	}
+
+
+	public void showFailedLoginDialog(View v){
+		
+		failedLoginDialog = new Dialog(ctx);
+		failedLoginDialog.setContentView(R.layout.badlogin);
+		failedLoginDialog.setTitle("Forkert Login");
+		failedLoginDialog.show();	
+		loginOK = (Button)failedLoginDialog.findViewById(R.id.loginOK);
+		
+		
+		loginOK.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {			
+				failedLoginDialog.dismiss();
+			}});
+
+	}
+	
 	
 	@Override
 	protected void onDestroy() {
