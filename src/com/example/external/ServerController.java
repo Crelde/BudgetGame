@@ -42,7 +42,7 @@ public class ServerController {
 	//private MobileServiceTable<User> mUserTable;
 	private MobileServiceTable<Post> mPostTable;
 
-	public void logIn(Context context, String username, String password, final onTaskCompleted listener){
+	public void logIn(final Context context, final String username, String password, final onTaskCompleted listener){
 		this.listener = listener;
 		try {
 			mClient = new MobileServiceClient(url, appkey, context);
@@ -58,6 +58,9 @@ public class ServerController {
 							ServiceFilterResponse response) {
 						
 						login = jsonData.getAsBoolean();
+						if(login){
+							syncPosts(context, username);
+						}
 						listener.getLogInTaskCompleted(login);
 						
 					}

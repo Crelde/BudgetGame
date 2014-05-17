@@ -8,24 +8,36 @@
         android:id="@+id/titel"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.34"
+        android:layout_weight="0.13"
+        android:ellipsize="marquee"
         android:gravity="left"
+        android:maxLines="1"
         android:text="" />
 
     <TextView
         android:id="@+id/dato"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
         android:gravity="center"
-        android:text="" />
+        android:text="2014-22-22" />
 
     <TextView
         android:id="@+id/beloeb"
         android:layout_width="42dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.14"
+        android:layout_weight="0.06"
+        android:ellipsize="marquee"
         android:gravity="right"
+        android:maxLines="1"
         android:text="" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="right"
+        android:maxLines="1"
+        android:text=" Kr " />
 
 </LinearLayout>

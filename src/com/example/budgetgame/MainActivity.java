@@ -110,6 +110,7 @@ public class MainActivity extends Activity {
 	
 	ServerController controller;
 	onTaskCompleted listener;
+	String currentUser;
 	
 	//Facebook stuff
 	public UiLifecycleHelper uiHelper;
@@ -168,6 +169,8 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Intent intent = getIntent();
+		currentUser = intent.getExtras().getString("userName");
 		
 		dbAdapter = new DBAdapter(this);
 		dbAdapter.open();
@@ -205,8 +208,8 @@ public class MainActivity extends Activity {
 				
 			}
 		};
-	//	controller.getSaldoForUser(this, "test1", listener);
-		controller.syncPosts(this, "test1");
+		//controller.getSaldoForUser(this, "test1", listener);
+		//controller.syncPosts(this, "test2");
 		//controller.logIn(this, "test1", "646464", listener);
 					
 		// Implementations of button onclicks so they change between the fragments
@@ -614,7 +617,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		dbAdapter.close();
+		
 		uiHelper.onDestroy();
 	}
 	 

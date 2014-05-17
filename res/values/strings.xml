@@ -25,7 +25,7 @@
     <string name="goalNameVal">MålNavn</string>
     <string name="goalDateVal">07-04-2012</string>
     <string name="historyDescVal">Du sparede 500 kr op!</string>
-    <string name="userEmail">Email</string>
+    <string name="userName">Username</string>
     <string name="userPassword">Password</string>
     <string name="loginButton">Login</string>
     <string name="app_id">589216931177316</string>
