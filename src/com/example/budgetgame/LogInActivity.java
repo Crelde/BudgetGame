@@ -50,11 +50,13 @@ public class LogInActivity extends Activity {
 			@Override
 			public void getLogInTaskCompleted(boolean login) {
 				loginSpinner.setVisibility(8);
+				Intent intent = new Intent(ctx, MainActivity.class);
+				intent.putExtra("userName", userNameEdit.getText().toString());
+				startActivity(intent);
+				/*
 				if (login){	
-					Intent intent = new Intent(ctx, MainActivity.class);
-					intent.putExtra("userName", userNameEdit.getText().toString());
-					startActivity(intent);
-				}
+					
+				}*/
 				
 			}
 		};

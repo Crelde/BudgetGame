@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="56dp"
+            android:text="Budget Helper"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="25sp" />
+         
+         <EditText
+	        android:id="@+id/userNameEdit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/userEmailText"
+	        android:layout_below="@+id/userEmailText"
+	        android:ems="10"
+	        android:inputType="textEmailAddress" >
+	
+	        <requestFocus />
+	        </EditText>
+	        
+	    <TextView
+		        android:id="@+id/userPasswordText"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/userNameEdit"
+		        android:layout_below="@+id/userNameEdit"
+		        android:layout_marginTop="17dp"
+		        android:text="@string/userPassword"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	    <TextView
+	        android:id="@+id/userEmailText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/titleText"
+	        android:layout_below="@+id/titleText"
+	        android:layout_marginTop="20dp"
+	        android:text="@string/userName"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	    
+	    <EditText
+	        android:id="@+id/userPasswordEdit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/userPasswordText"
+	        android:layout_below="@+id/userPasswordText"
+	        android:ems="10"
+	        android:inputType="textPassword" />
+
+	    <ProgressBar
+	        android:id="@+id/loginSpinner"
+	        style="?android:attr/progressBarStyleLarge"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:visibility="invisible" />
+
+	    <Button
+	        android:id="@+id/loginButton"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/userPasswordEdit"
+	        android:layout_below="@+id/userPasswordEdit"
+	        android:text="@string/loginButton" />
+
+	    <ImageView
+	        android:id="@+id/titleImage"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/userPasswordEdit"
+	        android:layout_below="@+id/userEmailText"
+	        android:layout_toRightOf="@+id/loginSpinner"
+	        android:src="@drawable/app_icon_budget" />
+
+    </RelativeLayout>
+    
+
+</ScrollView>

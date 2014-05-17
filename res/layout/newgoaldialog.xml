@@ -1,92 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp" >
+    >
 
-    <TextView
-        android:id="@+id/newGoalDialogName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indtast navnet på dit nye mål: "
-        android:maxWidth="200dp" />
-    
-
-    <EditText
-        android:id="@+id/newGoalDialogNameE"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/newGoalDialogName"
-        android:ems="10"
-        android:minHeight="50dp"/>
-    
-    <TextView 
-        android:id="@+id/newGoalDialogAmount"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Hvor meget skal spares op?"
-        android:layout_below="@id/newGoalDialogNameE"
-        android:minHeight="50dp"
-        android:maxWidth="200dp" />
-       
-	<EditText
-	    android:id="@+id/newGoalDialogAmountE"
+	<RelativeLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:layout_alignBottom="@+id/newGoalDialogAmount"
-	    android:layout_alignLeft="@+id/cancelnewGoalDialogButton"
-	    android:layout_below="@+id/newGoalDialogNameE"
-	    android:ems="10"
-	    android:inputType="number"
-	    android:minHeight="50dp" />
-
- />
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:padding="20dp" >
 	
-	<TextView 
-        android:id="@+id/newGoalDialogAmountMonth"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Hvor meget vil du ligge til side hver måned?"
-        android:layout_below="@id/newGoalDialogAmount"
-        android:minHeight="50dp"
-        android:maxWidth="200dp"
-        android:singleLine="false"
-         />
-        
+	    <TextView
+	        android:id="@+id/newGoalDialogName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Indtast navnet på dit nye mål: "
+	        android:maxWidth="200dp" />
+	    
+	
+	    <EditText
+	        android:id="@+id/newGoalDialogNameE"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/newGoalDialogName"
+	        android:ems="10"
+	        android:minHeight="50dp"/>
+	    
+	    <TextView 
+	        android:id="@+id/newGoalDialogAmount"
+	        android:layout_width="150dp"
+	        android:layout_height="wrap_content"
+	        android:text="Hvor meget skal spares op?"
+	        android:layout_below="@id/newGoalDialogNameE"
+	        android:minHeight="50dp"
+	        android:maxWidth="200dp" />
+	       
+		<EditText
+		    android:id="@+id/newGoalDialogAmountE"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_alignBottom="@+id/newGoalDialogAmount"
+		    android:layout_alignLeft="@+id/cancelnewGoalDialogButton"
+		    android:layout_below="@+id/newGoalDialogNameE"
+		    android:ems="10"
+		    android:inputType="number"
+		    android:minHeight="50dp" />
+	
+	 />
 		
-	<EditText
-	    android:id="@+id/newGoalDialogAmountMonthE"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:layout_below="@+id/newGoalDialogAmountE"
-	    android:layout_toRightOf="@id/newGoalDialogAmountMonth"
-	    android:layout_alignBottom="@id/newGoalDialogAmountMonth"
-	    android:ems="10"
-	    android:inputType="number"
-	    android:minHeight="50dp" /> />
-
+		<TextView 
+	        android:id="@+id/newGoalDialogAmountMonth"
+	        android:layout_width="150dp"
+	        android:layout_height="wrap_content"
+	        android:text="Hvor meget vil du ligge til side hver måned?"
+	        android:layout_below="@id/newGoalDialogAmount"
+	        android:minHeight="50dp"
+	        android:maxWidth="200dp"
+	        android:singleLine="false"
+	         />
+	        
+			
+		<EditText
+		    android:id="@+id/newGoalDialogAmountMonthE"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_below="@+id/newGoalDialogAmountE"
+		    android:layout_toRightOf="@id/newGoalDialogAmountMonth"
+		    android:layout_alignBottom="@id/newGoalDialogAmountMonth"
+		    android:ems="10"
+		    android:inputType="number"
+		    android:minHeight="50dp" /> />
 	
-
-	<Button
-	    android:id="@+id/cancelnewGoalDialogButton"
-	    style="?android:attr/buttonStyleSmall"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/newGoalDialogAmountMonth"
-	    android:layout_marginTop="41dp"
-	    android:layout_toRightOf="@+id/newGoalDialogAmount"
-	    android:text="Fortryd" />
-
-	<Button
-	    android:id="@+id/acceptnewGoalDialogButton"
-	    style="?android:attr/buttonStyleSmall"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignBaseline="@+id/cancelnewGoalDialogButton"
-	    android:layout_alignBottom="@+id/cancelnewGoalDialogButton"
-	    android:layout_alignRight="@+id/newGoalDialogAmount"
-	    android:layout_marginRight="20dp"
-	    android:text="Opret nyt mål" />
-
-</RelativeLayout>
+		
+	
+		<Button
+		    android:id="@+id/cancelnewGoalDialogButton"
+		    style="?android:attr/buttonStyleSmall"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/newGoalDialogAmountMonth"
+		    android:layout_marginTop="41dp"
+		    android:layout_toRightOf="@+id/newGoalDialogAmount"
+		    android:text="Fortryd" />
+	
+		<Button
+		    android:id="@+id/acceptnewGoalDialogButton"
+		    style="?android:attr/buttonStyleSmall"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBaseline="@+id/cancelnewGoalDialogButton"
+		    android:layout_alignBottom="@+id/cancelnewGoalDialogButton"
+		    android:layout_alignRight="@+id/newGoalDialogAmount"
+		    android:layout_marginRight="20dp"
+		    android:text="Opret nyt mål" />
+	
+	</RelativeLayout>
+</ScrollView>

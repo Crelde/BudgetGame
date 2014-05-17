@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <array name="themeArray">  
+    <item>Grøn</item>  
+    <item>Blå</item>  
+    <item>Rød</item>    
+     </array>
+     
+    <array name="themeArrayValues">  
+    <item>Green</item>  
+    <item>Blue</item>  
+    <item>Red</item>    
+     </array>
+    
+</resources>

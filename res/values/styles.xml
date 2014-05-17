@@ -20,5 +20,8 @@
     <color name="gray">#999999</color>
     <color name="lightGreen">#7FFD11</color>
     <color name="darkGreen">#47890E</color>
-    <color name="fbBlue">#2B31D8</color>
+    <color name="darkRed">#9F1212</color>
+    <color name="red_mine">#F91313</color>
+    <color name="darkBlue">#070D6C</color>
+    <color name="blue_mine">#3186E8</color>
 </resources>

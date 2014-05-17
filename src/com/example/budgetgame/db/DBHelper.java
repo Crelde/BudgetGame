@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 	
-	public static final int DB_VERSION = 12;
+	public static final int DB_VERSION = 14;
 	public static final String DB_POSTS = "budget";
 	public static final String APP_POSTS = "BudgetApp";
 	public static final String TABLE_POSTS = "Posteringer";

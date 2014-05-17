@@ -5,8 +5,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:layout_marginBottom="15dp">
 
         <TextView
             android:id="@+id/showPostDialogDescT"
@@ -77,10 +78,12 @@
         <Button
             android:id="@+id/showPostDialogFacebookButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/showPostDialogDate"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:padding="10dp"
             android:background="@color/com_facebook_blue"
             android:textColor="@color/com_facebook_loginview_text_color"
             android:text="Del på facebook" />
