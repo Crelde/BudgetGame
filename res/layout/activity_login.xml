@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <EditText
-        android:id="@+id/userEmailEdit"
+        android:id="@+id/userNameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/userEmailText"
@@ -19,8 +19,8 @@
         android:id="@+id/userPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/userEmailEdit"
-        android:layout_below="@+id/userEmailEdit"
+        android:layout_alignLeft="@+id/userNameEdit"
+        android:layout_below="@+id/userNameEdit"
         android:layout_marginTop="17dp"
         android:text="@string/userPassword"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -51,7 +51,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="38dp"
         android:layout_marginTop="20dp"
-        android:text="@string/userEmail"
+        android:text="@string/userName"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ProgressBar
+        android:id="@+id/loginSpinner"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

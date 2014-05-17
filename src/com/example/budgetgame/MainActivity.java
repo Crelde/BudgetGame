@@ -100,12 +100,15 @@ public class MainActivity extends Activity {
 	private int layoutWidth=320;
 	ServerController controller;
 	onTaskCompleted listener;
+	String currentUser;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Intent intent = getIntent();
+		currentUser = intent.getExtras().getString("userName");
 		
 		// Button initializers
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -135,8 +138,8 @@ public class MainActivity extends Activity {
 				
 			}
 		};
-	//	controller.getSaldoForUser(this, "test1", listener);
-		controller.syncPosts(this, "test1");
+		//controller.getSaldoForUser(this, "test1", listener);
+		//controller.syncPosts(this, "test2");
 		//controller.logIn(this, "test1", "646464", listener);
 					
 		// Implementations of button onclicks so they change between the fragments
@@ -419,7 +422,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		dbAdapter.close();
+		
+		//dbAdapter.close();
 	}
 	 
 }
