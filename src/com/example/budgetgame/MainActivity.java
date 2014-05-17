@@ -425,7 +425,7 @@ public class MainActivity extends Activity {
 				else if (Integer.valueOf(newGoalAmountE.getText().toString())==0) makeToast("Målet kan ikke være 0!");
 				else {
 					try{
-					long id = g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
+					int id = (int) g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
 					g.setStandardAlarmForGoal(getApplicationContext(),id);
 					newGoalDialog.dismiss();
 					}

@@ -33,7 +33,7 @@ public class GoalFrag extends ListFragment {
 		return id;
 	}
 	
-	public void setStandardAlarmForGoal(Context context, long id)
+	public void setStandardAlarmForGoal(Context context, int id)
 	{
 		dbAdapter.setStandardAlarmForGoal(context, id);
 	}

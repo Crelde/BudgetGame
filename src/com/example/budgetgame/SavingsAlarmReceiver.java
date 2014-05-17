@@ -18,7 +18,7 @@ public class SavingsAlarmReceiver extends BroadcastReceiver {
 		
 		Bundle extras = intent.getExtras();
 		
-		long goalId = extras.getLong("goalId");	
+		int goalId = extras.getInt("goalId");	
 		
 		try {
 			dbAdapter = new DBAdapter(context);

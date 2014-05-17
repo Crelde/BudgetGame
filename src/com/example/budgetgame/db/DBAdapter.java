@@ -105,18 +105,27 @@ public class DBAdapter {
 		values.put("beloebCurrent", 0);
 		values.put("beloebMål", mål);
 		values.put("toSavePerMonth", prMonth);
-		Calendar date = Calendar.getInstance();
-		int day = date.get(Calendar.DAY_OF_MONTH);
-		int month = date.get(Calendar.MONTH);
-		int year = date.get(Calendar.YEAR);
-		values.put("dateCreated", day+"-"+month+"-"+year);
+		String dateString = getDateString();
+		values.put("dateCreated", dateString);
 		long id = db.insert(TABLE_GOALS, null, values);
 		
-		// Achievement 1 completion
+		// Initialize achievement
 		ContentValues achievement = new ContentValues();
 		achievement.put("klaret", 1);
-		System.out.println("opdaterede så mange rows:"+ db.update(TABLE_ACHIEVEMENTS, achievement, "_id=1", null));
 		
+		// Check for completion
+		Cursor achievement1 = db.query(TABLE_ACHIEVEMENTS, new String[] {"klaret"}, "_id=1",null, null, null, null);
+		achievement1.moveToFirst();
+		int award1Int = achievement1.getInt(0);
+		if (award1Int==0){
+			// Achievement 1 completion
+			db.update(TABLE_ACHIEVEMENTS, achievement, "_id=1", null);			
+			ContentValues historyValues = new ContentValues();
+			historyValues.put("titel", "Du opnåede en medalje!");
+			historyValues.put("beskrivelse", "Du oprettede et mål, op opnåede dermed en medalje! Godt gået!");
+			historyValues.put("dato", getDateString());
+			db.insert(TABLE_GOALS_HISTORY, null, historyValues);
+		}		
 		return id;
 	}
 	
@@ -142,12 +151,12 @@ public class DBAdapter {
 	
 	public Cursor getHistory(){
 		Cursor query = db.query(TABLE_GOALS_HISTORY, new String[] { "_id", "titel", "beskrivelse", "dato" }, null, null, null, null,
-				"dato DESC");
+				"_id DESC");
 		return query;
 	}
 	
 	// Used when putting aside the standard amount of money as defined by the goal.
-	public boolean putAsideMoney(long goalId){
+	public boolean putAsideMoney(int goalId){
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål", "toSavePerMonth" }, "_id="+goalId, null, null, null, null, "1");
 		query.moveToFirst();
 		String title = query.getString(1);
@@ -157,15 +166,10 @@ public class DBAdapter {
 		
 		boolean finished = goalChangeDb(goalId, title, current, goal, monthly);	
 			
-		ContentValues achievement = new ContentValues();
-		achievement.put("klaret", 1);
-		// Achievement 2 completion
-		if (finished) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=2", null);
-		// Achievement 3 completion
-		if (finished && goal>=500) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=3", null);
+		int sum = (int) monthly;
 		
-		
-		
+		if (finished) checkAchievement(goalId, sum);
+			
 		return finished;
 	}
 	
@@ -180,16 +184,57 @@ public class DBAdapter {
 		
 		boolean finished = goalChangeDb(goalId, title, current, goal, sum);	
 			
-		ContentValues achievement = new ContentValues();
-		achievement.put("klaret", 1);
-		// Achievement 2 completion
-		if (finished) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=2", null);
-		// Achievement 3 completion
-		if (finished && goal>=500) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=3", null);
-		
-		
+		if (finished) checkAchievement(goalId, sum);
 		
 		return finished;
+	}
+	
+	private void checkAchievement(int goalId, int sum){
+		
+		// Initialize achievement
+		ContentValues achievement = new ContentValues();
+		achievement.put("klaret", 1);
+		
+		// Check for completion
+		Cursor achievement2 = db.query(TABLE_ACHIEVEMENTS, new String[] {"klaret"}, "_id=2",null, null, null, null);
+		achievement2.moveToFirst();
+		int award2Int = achievement2.getInt(0);
+		
+		if (award2Int==0){
+			// Set AchievementValue of 1 (true)
+			
+			// Achievement 2 completion
+			db.update(TABLE_ACHIEVEMENTS, achievement, "_id=2", null);			
+			ContentValues historyValues = new ContentValues();
+			historyValues.put("titel", "Du opnåede en medalje!");
+			historyValues.put("beskrivelse", "Du færdiggjorde et mål, op opnåede dermed en medalje! Godt gået!");
+			historyValues.put("dato", getDateString());
+			db.insert(TABLE_GOALS_HISTORY, null, historyValues);
+				
+			}
+		// Check for completion
+		Cursor achievement3 = db.query(TABLE_ACHIEVEMENTS, new String[] {"klaret"}, "_id=3",null, null, null, null);
+		achievement3.moveToFirst();
+		int award3Int = achievement3.getInt(0);
+		if (award3Int==0 && sum>=500){
+			System.out.println("Achieve3 TEST");
+			// Achievement 3 completion
+			db.update(TABLE_ACHIEVEMENTS, achievement, "_id=3", null);
+			ContentValues historyValues = new ContentValues();
+			historyValues.put("titel", "Du opnåede en medalje!");
+			historyValues.put("dato", getDateString());
+			historyValues.put("beskrivelse", "Du færdiggjorde et mål på over 500 kroner, og opnåede dermed en medalje! Godt gået!");
+			db.insert(TABLE_GOALS_HISTORY, null, historyValues);
+		}		
+	}
+	
+	private String getDateString(){
+		Calendar date = Calendar.getInstance();
+		int day = date.get(Calendar.DAY_OF_MONTH);
+		int month = date.get(Calendar.MONTH);
+		int year = date.get(Calendar.YEAR);
+		String dateString = day+"-"+month+"-"+year;
+		return dateString;
 	}
 	
 	public boolean goalChangeDb(long goalId, String goalTitle, float current, float goal, float amount)
@@ -199,23 +244,20 @@ public class DBAdapter {
 		ContentValues content = new ContentValues();
 		content.put("beloebCurrent", newAmount);
 		db.update(TABLE_GOALS, content, "_id="+goalId, null);
-		Calendar date = Calendar.getInstance();
-		int day = date.get(Calendar.DAY_OF_MONTH);
-		int month = date.get(Calendar.MONTH);
-		int year = date.get(Calendar.YEAR);
-		String dateString = day+"-"+month+"-"+year;
+		
+		String dateString = getDateString();
 		//String year = 
 		//String dateString = cal.toString();
 		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  '"+dateString+"')");
 		if(newAmount>=goal){
 			goalFinished = true;
-			db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du færdigjorde dit mål om at spare "+goal+" op!',  'now')");
+			db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du færdigjorde dit mål om at spare "+goal+" op!',  '"+dateString+"')");
 		}
 		
 		return goalFinished;
 	}
 	
-	public void setStandardAlarmForGoal(Context context, long goalId){
+	public void setStandardAlarmForGoal(Context context, int goalId){
 		//Toast.makeText(this, "setStandardAlarmForGoal start", Toast.LENGTH_LONG).show();
 		// Set startDate to be the 1st of the next month, (if the alarm is created on the 7th of January, the Alarm will start on the 1st of February.
 		Calendar startDate = Calendar.getInstance();
