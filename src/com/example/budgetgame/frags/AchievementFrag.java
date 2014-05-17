@@ -74,7 +74,7 @@ public class AchievementFrag extends Fragment {
 		
 		if (awardReached_1) getActivity().findViewById(R.id.imageView1).setAlpha(1);
 		if (awardReached_2) getActivity().findViewById(R.id.imageView2).setAlpha(1);
-		if (awardReached_3) getActivity().findViewById(R.id.imageView2).setAlpha(1);
+		if (awardReached_3) getActivity().findViewById(R.id.imageView3).setAlpha(1);
 		
 		
 		
@@ -100,6 +100,7 @@ public class AchievementFrag extends Fragment {
 		Log.i("achievement", "TITLE: " + achievements.getString(1));
 		Log.i("achievement", "DESC: " + achievements.getString(2));
 		Log.i("achievement", "KLARET: " + achievements.getInt(3));
+		Log.i("achievement", "ID: " + achievements.getInt(0));
 		
 		awardValue_1 = new ContentValues();
 		awardValue_2 = new ContentValues();
