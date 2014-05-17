@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory
+    	android:title="Tema">
+    	
+        <ListPreference
+            android:entries="@array/themeArray"
+            android:key="theme"
+            android:summary="Tryk her for at vælge tema for app'en."
+            android:entryValues="@array/themeArrayValues"
+            android:dialogTitle="Vælg tema"
+            android:defaultValue="@string/themeColor_Green"
+            
+        />
+            
+        
+        
+        
+	</PreferenceCategory>
+           
+
+    
+
+</PreferenceScreen>

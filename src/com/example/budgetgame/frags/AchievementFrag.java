@@ -167,7 +167,7 @@ public class AchievementFrag extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		initAchievementValues();
+		
 		
 		
 		
@@ -178,7 +178,7 @@ public class AchievementFrag extends Fragment {
 		super.onResume();
 		
 		getActivity().setTitle("Medaljer");
-		
+		initAchievementValues();
 		initAchievementViews();
 		checkAchievementStatus();
 		
