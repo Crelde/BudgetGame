@@ -248,8 +248,7 @@ public class MainActivity extends Activity {
 		String dateCreated = goal.getString(5);
 		final int goalId = goal.getInt(0);
 
-		
-		
+	
 		// Initialize views
 		goalTitle = (TextView) editGoalDialog.findViewById(R.id.editGoalDialogTitle);
 		goalSum = (EditText) editGoalDialog.findViewById(R.id.editGoalDialogGoal);
