@@ -34,6 +34,10 @@ import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
 import com.example.budgetgame.frags.SettingFrag;
 import com.example.external.ServerController;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
 
 public class MainActivity extends Activity {
 
@@ -83,6 +87,13 @@ public class MainActivity extends Activity {
 	private Button deleteButton;
 	private Button saveButton;
 	
+	//Show post controls
+	private Dialog showPostDialog;
+	private TextView postDesc;
+	private TextView postAmount;
+	private TextView postDate;
+	private Button facebookSharePost;
+	private Button closePostDialog;
 	
 	// Fragments
 	PostsFrag postfrag = new PostsFrag();
@@ -97,11 +108,61 @@ public class MainActivity extends Activity {
 	public static final int FRAGMENT_POSTS = 4;
 	public static final int FRAGMENT_ACHIEVEMENTS = 5;
 	
-	//Layout width
-	private int layoutWidth=320;
 	ServerController controller;
 	onTaskCompleted listener;
 	String currentUser;
+	
+	//Facebook stuff
+	public UiLifecycleHelper uiHelper;
+	
+	private static final String TAG = "Facebook";
+	
+	private Session.StatusCallback callback = new Session.StatusCallback() {
+	    @Override
+	    public void call(Session session, SessionState state, Exception exception) {
+	        onSessionStateChange(session, state, exception);
+	    }
+	};
+	
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    // Facebook
+	 // For scenarios where the main activity is launched and user
+	    // session is not null, the session state change notification
+	    // may not be triggered. Trigger it if it's open/closed.
+	    Session session = Session.getActiveSession();
+	    if (session != null &&
+	           (session.isOpened() || session.isClosed()) ) {
+	        onSessionStateChange(session, session.getState(), null);
+	    }
+
+	    uiHelper.onResume();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		
+		 uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+		        @Override
+		        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+		            Log.e("Activity", String.format("Error: %s", error.toString()));
+		        }
+
+		        @Override
+		        public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+		            Log.i("Activity", "Success!");
+		        }
+		    });
+	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    uiHelper.onPause();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +174,11 @@ public class MainActivity extends Activity {
 		
 		dbAdapter = new DBAdapter(this);
 		dbAdapter.open();
+		
+		//Facebook stuff 
+		uiHelper = new UiLifecycleHelper(this, callback);
+	    uiHelper.onCreate(savedInstanceState);
+		
 		
 		// Button initializers
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -189,6 +255,15 @@ public class MainActivity extends Activity {
 		});
 
 		
+	}
+	
+	//Facebook
+	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+	    if (state.isOpened()) {
+	        Log.i(TAG, "Logged in...");
+	    } else if (state.isClosed()) {
+	        Log.i(TAG, "Logged out...");
+	    }
 	}
 	
 	public void makeToast(String toast){ Toast.makeText(this, toast, Toast.LENGTH_SHORT).show(); }
@@ -337,6 +412,69 @@ public class MainActivity extends Activity {
 		
 		
 	}
+	/*
+	 * private Dialog showPostDialog;
+	private TextView postDesc;
+	private TextView postAmount;
+	private TextView postDate;
+	private Button facebookSharePost;
+	private Button closePostDialog;
+	 */
+	public void showPostDialog(int postId){
+		showPostDialog = new Dialog(MainActivity.this);
+		showPostDialog.setContentView(R.layout.showpostdialog);
+		showPostDialog.setTitle("Postering");
+		showPostDialog.show();
+		
+		// get Post
+		Cursor post = dbAdapter.getPost(postId);
+		
+		//Initialize views
+		postDesc = (TextView) showPostDialog.findViewById(R.id.showPostDialogDesc);
+		postAmount = (TextView) showPostDialog.findViewById(R.id.showPostDialogAmount);
+		postDate = (TextView) showPostDialog.findViewById(R.id.showPostDialogDate);
+		facebookSharePost = (Button) showPostDialog.findViewById(R.id.showPostDialogFacebookButton);
+		closePostDialog = (Button) showPostDialog.findViewById(R.id.showPostDialogCloseButton);
+		//Cursor query = db.query(TABLE_POSTS, new String[] { "titel", "dato", "beloeb" }, "_id="+id, null, null, null, null);
+		post.moveToFirst();
+		
+		final String desc = post.getString(0);
+		final String date = post.getString(1);
+		final float amount = post.getFloat(2);
+		
+		
+		
+		postDesc.setText(desc);
+		postDate.setText(date);
+		postAmount.setText(""+amount);
+		
+		closePostDialog.setOnClickListener(new OnClickListener() {	
+			@Override
+			public void onClick(View v) {
+				showPostDialog.dismiss();
+			}
+		});
+		
+		facebookSharePost.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String title;
+				if (amount<0) title = "Jeg har d. " + date + " brugt " + amount + " kr.!";
+				else title = "Jeg har d. " + date + " fået " + amount + " kr. ind på kontoen!";
+				FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getParent())
+			        .setCaption("Jeg bruger BudgetHelper til at hjælpe med at holde styr på økonomien, du skulle prøve!")
+					.setName(title)
+			        .build();
+				uiHelper.trackPendingDialogCall(shareDialog.present());
+				
+			}
+		});
+		
+		
+		
+		
+	}
 	
 	public void ShowAwardDialog(ContentValues award){
 		awardDialog = new Dialog(MainActivity.this);
@@ -471,10 +609,16 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		uiHelper.onSaveInstanceState(outState);
+	}
+	
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		
-		//dbAdapter.close();
+		uiHelper.onDestroy();
 	}
 	 
 }

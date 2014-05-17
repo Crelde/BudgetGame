@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/showPostDialogDescT"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Beskrivelse:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/showPostDialogAmountT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogDesc"
+            android:layout_marginTop="22dp"
+            android:text="Beløb:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/showPostDialogAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogAmountT"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/showPostDialogDesc"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogDescT"
+            android:text="Lorem ipsum blaa Lorem ipsum blaa Lorem ipsum blaa Lorem ipsum blaa Lorem ipsum blaa Lorem ipsum blaa Lorem ipsum blaa "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/showPostDialogKr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/showPostDialogAmount"
+            android:layout_alignBottom="@+id/showPostDialogAmount"
+            android:layout_toRightOf="@+id/showPostDialogAmount"
+            android:text="Kr."
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/showPostDialogDateT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogAmount"
+            android:layout_marginTop="21dp"
+            android:text="Dato:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/showPostDialogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogDateT"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/showPostDialogFacebookButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/showPostDialogDate"
+            android:layout_marginTop="30dp"
+            android:background="@color/com_facebook_blue"
+            android:textColor="@color/com_facebook_loginview_text_color"
+            android:text="Del på facebook" />
+
+        <Button
+            android:id="@+id/showPostDialogCloseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/showPostDialogFacebookButton"
+            android:layout_alignBottom="@+id/showPostDialogFacebookButton"
+            android:layout_toRightOf="@+id/showPostDialogFacebookButton"
+            android:text="Luk" />
+        
+    </RelativeLayout>
+    
+
+</ScrollView>
