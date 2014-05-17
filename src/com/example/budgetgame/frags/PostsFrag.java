@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class PostsFrag extends ListFragment {
 
@@ -81,6 +84,18 @@ public class PostsFrag extends ListFragment {
 	public void onResume() {
 		super.onResume();
 		getActivity().setTitle("Posteringer");
+		
+		//OnItemClickListener//
+				ListView list = (ListView) getActivity().findViewById(android.R.id.list);		
+				//System.out.println(list.toString());
+				list.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+						((MainActivity) getActivity()).showPostDialog((int) id);
+						
+					                
+					            }
+					        });
 	}
 	
 	@Override

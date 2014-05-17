@@ -28,6 +28,7 @@
     <string name="userEmail">Email</string>
     <string name="userPassword">Password</string>
     <string name="loginButton">Login</string>
+    <string name="app_id">589216931177316</string>
     
 
 </resources>

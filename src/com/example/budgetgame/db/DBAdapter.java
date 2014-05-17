@@ -64,6 +64,12 @@ public class DBAdapter {
 		return query;
 	}
 	
+	public Cursor getPost(int id){
+		Cursor query = db.query(TABLE_POSTS, new String[] { "titel", "dato", "beloeb" }, "_id="+id, null, null, null, null);
+		return query;
+	}
+	
+	
 	public Cursor getAllGoals(){
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål" }, null, null, null, null,
 				"_id DESC");
