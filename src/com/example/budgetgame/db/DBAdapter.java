@@ -121,8 +121,15 @@ public class DBAdapter {
 		else return false;		
 	}
 	
-	public boolean updateGoal(ContentValues goal){
+	public boolean updateGoal(ContentValues goal, int goalId, int extra){
+			
+		db.update(TABLE_GOALS, goal, "_id="+goalId, null);
 		
+		
+		if (extra>0)
+		{
+			putAsideMoney(goalId, extra);
+		}
 		
 		return true;
 	}
@@ -144,7 +151,18 @@ public class DBAdapter {
 		float goal = query.getFloat(3);
 		float monthly = query.getFloat(4);
 		
-		return goalChangeDb(goalId, title, current, goal, monthly);
+		boolean finished = goalChangeDb(goalId, title, current, goal, monthly);	
+			
+		ContentValues achievement = new ContentValues();
+		achievement.put("klaret", 1);
+		// Achievement 2 completion
+		if (finished) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=2", null);
+		// Achievement 3 completion
+		if (finished && goal>=500) db.update(TABLE_ACHIEVEMENTS, achievement, "_id=3", null);
+		
+		
+		
+		return finished;
 	}
 	
 	// Used when putting aside an amount that is not the standard amount.
@@ -157,8 +175,7 @@ public class DBAdapter {
 		query.close();
 		
 		boolean finished = goalChangeDb(goalId, title, current, goal, sum);	
-		
-		
+			
 		ContentValues achievement = new ContentValues();
 		achievement.put("klaret", 1);
 		// Achievement 2 completion
@@ -178,11 +195,14 @@ public class DBAdapter {
 		ContentValues content = new ContentValues();
 		content.put("beloebCurrent", newAmount);
 		db.update(TABLE_GOALS, content, "_id="+goalId, null);
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(System.currentTimeMillis());
+		Calendar date = Calendar.getInstance();
+		int day = date.get(Calendar.DAY_OF_MONTH);
+		int month = date.get(Calendar.MONTH);
+		int year = date.get(Calendar.YEAR);
+		String dateString = day+"-"+month+"-"+year;
 		//String year = 
 		//String dateString = cal.toString();
-		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  'Now')");
+		db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du sparede "+amount+" kroner op!',  '"+dateString+"')");
 		if(newAmount>=goal){
 			goalFinished = true;
 			db.execSQL("INSERT INTO " + TABLE_GOALS_HISTORY + " (titel, beskrivelse, dato) VALUES ('"+goalTitle+"', 'Du færdigjorde dit mål om at spare "+goal+" op!',  'now')");

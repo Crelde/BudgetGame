@@ -74,7 +74,7 @@ public class AchievementFrag extends Fragment {
 		
 		if (awardReached_1) getActivity().findViewById(R.id.imageView1).setAlpha(1);
 		if (awardReached_2) getActivity().findViewById(R.id.imageView2).setAlpha(1);
-		if (awardReached_3) getActivity().findViewById(R.id.imageView2).setAlpha(1);
+		if (awardReached_3) getActivity().findViewById(R.id.imageView3).setAlpha(1);
 		
 		
 		

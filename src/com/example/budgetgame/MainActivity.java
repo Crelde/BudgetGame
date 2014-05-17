@@ -13,6 +13,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -104,6 +105,9 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		dbAdapter = new DBAdapter(this);
+		dbAdapter.open();
 		
 		// Button initializers
 		homeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -224,6 +228,8 @@ public class MainActivity extends Activity {
 		float perMonth = goal.getFloat(4);
 		String dateCreated = goal.getString(5);
 		final int goalId = goal.getInt(0);
+
+		
 		
 		// Initialize views
 		goalTitle = (TextView) editGoalDialog.findViewById(R.id.editGoalDialogTitle);
@@ -251,19 +257,60 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TEST KEWIN
+				GoalFrag g = (GoalFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
 				dbAdapter.deleteGoal(goalId);
 				editGoalDialog.dismiss();
 				goalfrag.initGoals();
+				g.setStandardAlarmForGoal(getApplicationContext(),goalId);
 			}
 		});
+		
+		
 		
 		saveButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// DO THIS KEWIN
-				//dbAdapter.updateGoal(goal)
+				Editable goalSumE = goalSum.getText();
+				String goalValueString = goalSumE.toString();
+				
+				Editable savePerMonthE = savePerMonth.getText();
+				String saveMonthlyString = savePerMonthE.toString();
+				
+				Editable putAsideE = putAsideSum.getText();
+				String putAsideString = putAsideE.toString();
+				boolean success = false;
+				if (goalValueString.compareTo("")!=0 && saveMonthlyString.compareTo("")!=0 && !(Float.valueOf(goalValueString)==0))
+				{					
+					
+					final ContentValues newGoal = new ContentValues();
+											
+					newGoal.put("beloebMål", Float.valueOf(goalValueString));
+					newGoal.put("toSavePerMonth", Float.valueOf(saveMonthlyString));
+					
+					int extra = 0;
+					
+					try{
+						extra = Integer.valueOf(putAsideString);
+					}
+					catch(NumberFormatException e){
+						// expected
+						System.out.println("exception");
+					}
+			
+					dbAdapter.updateGoal(newGoal, goalId, extra);
+					editGoalDialog.dismiss();
+					goalfrag.initGoals();
+					success = true;
+					
+				}
+				if (!success){
+					boolean zeroGoal = false;
+					if (Float.valueOf(goalValueString)==0) zeroGoal=true;
+					if (!zeroGoal) makeToast("Du skal udfylde både samlet mål og beløb der skal sættes til side!");
+					else makeToast("Målet må ikke være 0 kr!");
+				}
+							
 			}
 		});
 		
@@ -338,11 +385,11 @@ public class MainActivity extends Activity {
 		newGoalDialog.setContentView(R.layout.newgoaldialog);
 		newGoalDialog.setTitle("Opret nyt mål");
 		newGoalDialog.show();
-		newGoalNameE = (EditText)newGoalDialog.findViewById(R.id.newGoalNameE);
-		newGoalAmountE= (EditText)newGoalDialog.findViewById(R.id.newGoalAmountE);
-		newGoalAmountMonthE = (EditText)newGoalDialog.findViewById(R.id.newGoalAmountMonthE);
-		acceptGoalButton = (Button)newGoalDialog.findViewById(R.id.acceptNewGoalButton);
-		cancelNewGoalButton= (Button)newGoalDialog.findViewById(R.id.cancelNewGoalButton);
+		newGoalNameE = (EditText)newGoalDialog.findViewById(R.id.newGoalDialogNameE);
+		newGoalAmountE= (EditText)newGoalDialog.findViewById(R.id.newGoalDialogAmountE);
+		newGoalAmountMonthE = (EditText)newGoalDialog.findViewById(R.id.newGoalDialogAmountMonthE);
+		acceptGoalButton = (Button)newGoalDialog.findViewById(R.id.acceptnewGoalDialogButton);
+		cancelNewGoalButton= (Button)newGoalDialog.findViewById(R.id.cancelnewGoalDialogButton);
 		newGoalDialog.setCancelable(false);
 		acceptGoalButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -356,10 +403,17 @@ public class MainActivity extends Activity {
 							newGoalAmountMonthE.getText().toString().trim().length() <= 0){		
 					Toast.makeText(getApplicationContext(), "Udfyld venligst alle felter!", Toast.LENGTH_SHORT).show();		
 				}
-				else {				
+				else if (Integer.valueOf(newGoalAmountE.getText().toString())==0) makeToast("Målet kan ikke være 0!");
+				else {
+					try{
 					long id = g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
 					g.setStandardAlarmForGoal(getApplicationContext(),id);
 					newGoalDialog.dismiss();
+					}
+					catch(NumberFormatException e){
+						makeToast("Tallet er for højt!");
+					}
+					
 				}	
 			}});
 		
@@ -392,8 +446,6 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		dbAdapter = new DBAdapter(this);
-		dbAdapter.open();
 		return true;
 	}
 	
