@@ -190,12 +190,12 @@ public class DBAdapter {
 		
 		boolean finished = goalChangeDb(goalId, title, current, goal, sum);	
 			
-		if (finished) checkAchievement(goalId, sum);
+		if (finished) checkAchievement(goalId, current);
 		
 		return finished;
 	}
 	
-	private void checkAchievement(int goalId, int sum){
+	private void checkAchievement(int goalId, float sum){
 		
 		// Initialize achievement
 		ContentValues achievement = new ContentValues();
