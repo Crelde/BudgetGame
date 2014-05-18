@@ -1,148 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView"
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content"    
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent"    
         >
     
- 
-       <RelativeLayout 
-	       android:layout_width="fill_parent" 
-	       android:layout_height="wrap_content">
-	           
-	    <ImageView
-	        android:id="@+id/imageView1"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:src="@drawable/graf"
-	        android:contentDescription="@string/imageDesc"
-			/>
-           
-		    <TextView
-		        android:id="@+id/currText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@id/imageView1"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="25dp"
-		        android:layout_marginTop="20dp"
-		        android:text="@string/currSaldo"
-		        android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-		    <TextView
-		        android:id="@+id/aviableText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignLeft="@+id/currText"
-		        android:layout_below="@+id/currText"
-		        android:layout_marginTop="13dp"
-		        android:text="@string/avaible"
-		        android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-		    <TextView
-		        android:id="@+id/prevText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignLeft="@+id/currText"
-		        android:layout_below="@+id/aviableText"
-		        android:layout_marginTop="13dp"
-		        android:text="@string/perDayPrev"
-		        android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-		    <TextView
-		        android:id="@+id/comingText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignLeft="@+id/currText"
-		        android:layout_below="@+id/prevText"
-		        android:layout_marginTop="13dp"
-		        android:text="@string/perDayComing"
-		        android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-		    <TextView
-		        android:id="@+id/payDayText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignLeft="@+id/currText"
-		        android:layout_below="@+id/comingText"
-		        android:layout_marginTop="13dp"
-		        android:text="@string/payDayIn"
-		        android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-		    <TextView
-		        android:id="@+id/currValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/currText"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="175dp"
-		        android:text="@string/saldoVal"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-		
-		    <TextView
-		        android:id="@+id/avaibleValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/aviableText"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="175dp"
-		        android:text="@string/avaibleVal"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-		
-		    <TextView
-		        android:id="@+id/prevValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/prevText"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="175dp"
-		        android:text="@string/perDayPrevVal"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-		
-		    <TextView
-		        android:id="@+id/comingValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/comingText"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="175dp"
-		        android:text="@string/perDayComingVal"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-		
-		    <TextView
-		        android:id="@+id/payDayValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/payDayText"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="175dp"
-		        android:text="@string/payDayVal"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-		    
-		    <TextView 
-		        android:id="@+id/syncedText"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentLeft="true"
-		        android:layout_marginLeft="25dp"
-		        android:layout_below="@id/payDayText"
-		        android:layout_marginTop="25dp"	
-		        android:textColor="@color/gray"	        
-		        android:text="@string/synced"
-		        />
-		    <TextView
-		        android:id="@+id/syncedValue"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@id/syncedText"
-		        android:layout_alignBottom="@id/syncedText"
-		        android:layout_marginLeft="5dp"
-		        android:textColor="@color/gray"
-		        android:text="@string/syncedVal"
-		        
-		        
-		        
-		        />
-	    </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content" >
+
+           <ImageView
+               android:id="@+id/imageView1"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:contentDescription="@string/imageDesc"
+               android:src="@drawable/graf" />
+
+           <TextView
+               android:id="@+id/currText"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_below="@id/imageView1"
+               android:layout_marginLeft="25dp"
+               android:layout_marginTop="20dp"
+               android:text="@string/currSaldo"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
+
+           <TextView
+               android:id="@+id/availableText"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignLeft="@+id/currText"
+               android:layout_below="@+id/currText"
+               android:layout_marginTop="13dp"
+               android:text="@string/available"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
+
+           <TextView
+               android:id="@+id/comingText"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignLeft="@+id/currText"
+               android:layout_below="@+id/availableText"
+               android:layout_marginTop="13dp"
+               android:text="@string/perDayComing"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
+
+           <TextView
+               android:id="@+id/payDayText"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignLeft="@+id/currText"
+               android:layout_below="@+id/comingText"
+               android:layout_marginTop="13dp"
+               android:text="@string/payDayIn"
+               android:textAppearance="?android:attr/textAppearanceSmall" />
+
+           <TextView
+               android:id="@+id/currValue"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/currText"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="175dp"
+               android:text="@string/saldoVal"
+               android:textAppearance="?android:attr/textAppearanceMedium" />
+
+           <TextView
+               android:id="@+id/availableValue"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/availableText"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="175dp"
+               android:text="@string/availableVal"
+               android:textAppearance="?android:attr/textAppearanceMedium" />
+
+           <TextView
+               android:id="@+id/comingValue"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/comingText"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="175dp"
+               android:text="@string/perDayComingVal"
+               android:textAppearance="?android:attr/textAppearanceMedium" />
+
+           <TextView
+               android:id="@+id/payDayValue"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/payDayText"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="175dp"
+               android:text="@string/payDayVal"
+               android:textAppearance="?android:attr/textAppearanceMedium" />
+
+           <ProgressBar
+               android:id="@+id/overViewProgressBar"
+               style="?android:attr/progressBarStyleLarge"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_centerVertical="true"
+               android:visibility="visible" />
+       </RelativeLayout>
+
     </ScrollView>
 

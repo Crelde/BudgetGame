@@ -112,9 +112,9 @@ public class MainActivity extends Activity {
 	public static final int FRAGMENT_POSTS = 4;
 	public static final int FRAGMENT_ACHIEVEMENTS = 5;
 	
-	ServerController controller;
-	onTaskCompleted listener;
-	String currentUser;
+	public ServerController controller;
+	public onTaskCompleted listener;
+	public String currentUser;
 	
 	//Facebook stuff
 	public UiLifecycleHelper uiHelper;
@@ -167,6 +167,23 @@ public class MainActivity extends Activity {
 	    super.onPause();
 	    uiHelper.onPause();
 	}
+	
+	public void DisableNavigation(){
+		homeButton.setEnabled(false);
+		postsButton.setEnabled(false);
+		goalsButton.setEnabled(false);
+		settingsButton.setEnabled(false);
+		achievementsButton.setEnabled(false);
+	}
+	
+	public void EnableNavigation(){
+		homeButton.setEnabled(true);
+		postsButton.setEnabled(true);
+		goalsButton.setEnabled(true);
+		settingsButton.setEnabled(true);
+		achievementsButton.setEnabled(true);
+	}
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

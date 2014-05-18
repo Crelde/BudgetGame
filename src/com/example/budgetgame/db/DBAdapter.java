@@ -49,18 +49,18 @@ public class DBAdapter {
 
 	public Cursor getAllPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, null, null, null, null,
-				"_id DESC");
+				"dato DESC");
 		return query;
 	}
 	public Cursor getNegPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb < 0", null, null, null,
-				"_id DESC");
+				"dato DESC");
 		return query;
 	}
 	
 	public Cursor getPosPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb >= 0", null, null, null,
-				"_id DESC");
+				"dato DESC");
 		return query;
 	}
 	
@@ -237,7 +237,7 @@ public class DBAdapter {
 	private String getDateString(){
 		Calendar date = Calendar.getInstance();
 		int day = date.get(Calendar.DAY_OF_MONTH);
-		int month = date.get(Calendar.MONTH);
+		int month = date.get(Calendar.MONTH)+1;
 		int year = date.get(Calendar.YEAR);
 		String dateString = day+"-"+month+"-"+year;
 		return dateString;
