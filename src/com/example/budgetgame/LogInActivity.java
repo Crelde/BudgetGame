@@ -15,15 +15,51 @@ import android.widget.ProgressBar;
 
 public class LogInActivity extends Activity {
 	
+	/**
+	 * @uml.property  name="loginButton"
+	 * @uml.associationEnd  
+	 */
 	private Button loginButton;
+	/**
+	 * @uml.property  name="loginSpinner"
+	 * @uml.associationEnd  
+	 */
 	private ProgressBar loginSpinner;
+	/**
+	 * @uml.property  name="userNameEdit"
+	 * @uml.associationEnd  
+	 */
 	private EditText userNameEdit;
+	/**
+	 * @uml.property  name="passWordEdit"
+	 * @uml.associationEnd  
+	 */
 	private EditText passWordEdit;
+	/**
+	 * @uml.property  name="ctx"
+	 * @uml.associationEnd  
+	 */
 	private Context ctx;
+	/**
+	 * @uml.property  name="failedLoginDialog"
+	 * @uml.associationEnd  
+	 */
 	private Dialog failedLoginDialog;
+	/**
+	 * @uml.property  name="loginOK"
+	 * @uml.associationEnd  
+	 */
 	private Button loginOK;
 	
+	/**
+	 * @uml.property  name="listener"
+	 * @uml.associationEnd  
+	 */
 	onTaskCompleted listener;
+	/**
+	 * @uml.property  name="controller"
+	 * @uml.associationEnd  
+	 */
 	ServerController controller;
 	
 	@Override
@@ -50,6 +86,9 @@ public class LogInActivity extends Activity {
 			@Override
 			public void getLogInTaskCompleted(boolean login) {
 				loginSpinner.setVisibility(8);
+				userNameEdit.setEnabled(true);
+				passWordEdit.setEnabled(true);
+				loginButton.setEnabled(true);
 				if(login)
 				{
 					Intent intent = new Intent(ctx, MainActivity.class);
@@ -57,6 +96,7 @@ public class LogInActivity extends Activity {
 					startActivity(intent);
 				}
 				else{
+					
 					showFailedLoginDialog();
 				}
 				
@@ -68,6 +108,9 @@ public class LogInActivity extends Activity {
 			public void onClick(View v) {
 				String uName = userNameEdit.getText().toString();
 				String pw = passWordEdit.getText().toString();
+				userNameEdit.setEnabled(false);
+				passWordEdit.setEnabled(false);
+				loginButton.setEnabled(false);
 				
 				loginSpinner.setVisibility(0);
 				controller.logIn(ctx, uName, pw, listener);

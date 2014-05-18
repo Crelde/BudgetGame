@@ -82,6 +82,7 @@ public class MainActivity extends Activity {
 	private Dialog editGoalDialog;
 	private TextView goalTitle;
 	private TextView dateText;
+
 	private EditText goalSum;
 	private EditText savedCurrent;
 	private EditText savePerMonth;
@@ -104,6 +105,7 @@ public class MainActivity extends Activity {
 	GoalFrag goalfrag = new GoalFrag();
 	SettingsFrag settingfrag = new SettingsFrag(); // ÆNDRET KEWIN
 	AchievementFrag achievefrag = new AchievementFrag();
+	
 	MainActivity self = this;
 	
 	public static final int FRAGMENT_HOME = 1;
@@ -117,10 +119,8 @@ public class MainActivity extends Activity {
 	public String currentUser;
 	
 	//Facebook stuff
-	public UiLifecycleHelper uiHelper;
-	
-	private static final String TAG = "Facebook";
-	
+	public UiLifecycleHelper uiHelper;	
+	private static final String TAG = "Facebook";	
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 	    @Override
 	    public void call(Session session, SessionState state, Exception exception) {
