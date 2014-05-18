@@ -38,6 +38,7 @@ public class PostsFrag extends ListFragment {
 						"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
+		getActivity().stopManagingCursor(c);
 		
 	}
 	public void initPosPosts(){
@@ -50,6 +51,7 @@ public class PostsFrag extends ListFragment {
 						"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
+		getActivity().stopManagingCursor(c);
 	}
 	public void initNegPosts(){
 			dbAdapter = new DBAdapter(getActivity());
@@ -61,6 +63,7 @@ public class PostsFrag extends ListFragment {
 							"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 							R.id.dato, R.id.beloeb});
 			setListAdapter(cursorAdapter);
+			getActivity().stopManagingCursor(c);
 		}
 	
 	

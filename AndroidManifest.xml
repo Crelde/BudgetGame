@@ -13,10 +13,12 @@
         android:icon="@drawable/app_icon_budget"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="com.example.budgetgame.MainActivity"
             android:label="@string/app_name" 
             android:theme="@android:style/Theme.Black">
+            
         </activity>
         <activity 
             android:name="com.example.budgetgame.LogInActivity"
