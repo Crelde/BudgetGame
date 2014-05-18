@@ -50,15 +50,24 @@ public class LogInActivity extends Activity {
 			@Override
 			public void getLogInTaskCompleted(boolean login) {
 				loginSpinner.setVisibility(8);
-				if(login)
-				{
+				Intent intent = new Intent(ctx, MainActivity.class);
+				intent.putExtra("userName", userNameEdit.getText().toString());
+				startActivity(intent);
+				/*
+				if (login){	
+<<<<<<< HEAD
 					Intent intent = new Intent(ctx, MainActivity.class);
 					intent.putExtra("userName", userNameEdit.getText().toString());
 					startActivity(intent);
 				}
 				else{
-					showFailedLoginDialog();
+					View v = new View(ctx);
+					showFailedLoginDialog(v);
 				}
+=======
+					
+				}*/
+>>>>>>> BudgetGame/master
 				
 			}
 		};
@@ -79,7 +88,7 @@ public class LogInActivity extends Activity {
 	}
 
 
-	public void showFailedLoginDialog(){
+	public void showFailedLoginDialog(View v){
 		
 		failedLoginDialog = new Dialog(ctx);
 		failedLoginDialog.setContentView(R.layout.badlogin);
