@@ -59,11 +59,7 @@ public class LogInActivity extends Activity {
 					intent.putExtra("userName", userNameEdit.getText().toString());
 					startActivity(intent);
 				}
-				else{
-					
-					showFailedLoginDialog();
-				}
-				
+				else{ showFailedLoginDialog(); }				
 			}
 		};
 		loginButton.setOnClickListener(new OnClickListener() {
@@ -77,10 +73,7 @@ public class LogInActivity extends Activity {
 				loginButton.setEnabled(false);
 				
 				loginSpinner.setVisibility(0);
-				controller.logIn(ctx, uName, pw, listener);
-				
-				
-			
+				controller.logIn(ctx, uName, pw, listener);	
 			}
 		});
 	}
@@ -98,10 +91,10 @@ public class LogInActivity extends Activity {
 		loginOK.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {			
+			public void onClick(View v) { 
 				failedLoginDialog.dismiss();
-			}});
-
+			}
+		});
 	}
 	
 	

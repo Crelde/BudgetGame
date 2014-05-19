@@ -183,8 +183,7 @@ public class MainActivity extends Activity {
 		settingsButton.setEnabled(true);
 		achievementsButton.setEnabled(true);
 	}
-	
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -220,20 +219,6 @@ public class MainActivity extends Activity {
 		}
 		controller = new ServerController();
 	
-		listener = new onTaskCompleted() {
-			
-			@Override
-			public void getSaldoTaskCompleted(double saldo) {
-				System.out.println("Saldo: "+saldo);
-				
-			}
-			
-			@Override
-			public void getLogInTaskCompleted(boolean login) {
-				System.out.println("Login: "+login);
-				
-			}
-		};
 		//controller.getSaldoForUser(this, "test1", listener);
 		//controller.syncPosts(this, "test2");
 		//controller.logIn(this, "test1", "646464", listener);
@@ -293,9 +278,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void makeToast(String toast){ Toast.makeText(this, toast, Toast.LENGTH_SHORT).show(); }
-	
-	
-	
+		
 	public void changeFragment(int fragment){
 		
 		setActiveFragment(fragment);
@@ -328,8 +311,7 @@ public class MainActivity extends Activity {
 		
 		int activeColor = getResources().getColor(R.color.darkGreen);
 		int inactiveColor = getResources().getColor(R.color.lightGreen);
-		
-		
+				
 		if (themeColor.compareTo("Green")!=0){
 			if (themeColor.compareTo("Blue")==0){
 				activeColor = getResources().getColor(R.color.darkBlue);
@@ -338,9 +320,7 @@ public class MainActivity extends Activity {
 			else if (themeColor.compareTo("Red")==0){
 				activeColor = getResources().getColor(R.color.darkRed);
 				inactiveColor = getResources().getColor(R.color.red_mine);
-			}
-			
-			
+			}						
 		}
 		
 		
@@ -462,14 +442,7 @@ public class MainActivity extends Activity {
 		
 		
 	}
-	/*
-	 * private Dialog showPostDialog;
-	private TextView postDesc;
-	private TextView postAmount;
-	private TextView postDate;
-	private Button facebookSharePost;
-	private Button closePostDialog;
-	 */
+
 	public void showPostDialog(int postId){
 		showPostDialog = new Dialog(MainActivity.this);
 		showPostDialog.setContentView(R.layout.showpostdialog);
@@ -522,10 +495,7 @@ public class MainActivity extends Activity {
 				
 			}
 		});
-		
-		
-		
-		
+	
 	}
 	
 	public void ShowAwardDialog(ContentValues award){
@@ -551,7 +521,6 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-
 
 	public void ShowPostsDialog(View v){
 		
@@ -633,26 +602,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				newGoalDialog.cancel();
-			}});
-	
-		
-	}
-	
-	
-	
-	/* 
-	 * 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		Intent intent = new Intent(this, AlarmReceiver.class);
-		pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		
+			}});		
 	}
 
-	public void setAlarm(View view) {
-		alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + FIVE_SECONDS, pendingIntent);
-	}*/
-	
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
