@@ -1,9 +1,7 @@
 package com.example.budgetgame.frags;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import android.app.Fragment;
 import android.database.Cursor;

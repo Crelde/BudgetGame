@@ -1,9 +1,5 @@
 package com.example.budgetgame.frags;
 
-import com.example.budgetgame.MainActivity;
-import com.example.budgetgame.R;
-import com.example.budgetgame.db.DBAdapter;
-
 import android.app.ListFragment;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,9 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.example.budgetgame.MainActivity;
+import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 public class PostsFrag extends ListFragment {
 

@@ -1,10 +1,6 @@
 package com.example.budgetgame.db;
 
 import java.util.Calendar;
-import java.util.Date;
-
-import com.example.budgetgame.SavingsAlarmReceiver;
-import com.example.external.Post;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -13,7 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
+
+import com.example.budgetgame.SavingsAlarmReceiver;
+import com.example.external.Post;
 
 public class DBAdapter {
 	DBHelper helper;

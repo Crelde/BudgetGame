@@ -1,14 +1,9 @@
 package com.example.budgetgame;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +29,6 @@ import com.example.budgetgame.frags.AchievementFrag;
 import com.example.budgetgame.frags.GoalFrag;
 import com.example.budgetgame.frags.OverviewFrag;
 import com.example.budgetgame.frags.PostsFrag;
-import com.example.budgetgame.frags.SettingFrag;
 import com.example.budgetgame.frags.SettingsFrag;
 import com.example.external.ServerController;
 import com.facebook.Session;

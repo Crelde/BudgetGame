@@ -1,14 +1,9 @@
 package com.example.budgetgame.frags;
 
-import com.example.budgetgame.MainActivity;
-import com.example.budgetgame.R;
-import com.example.budgetgame.db.DBAdapter;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +12,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.budgetgame.MainActivity;
+import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 public class AchievementFrag extends Fragment {
 

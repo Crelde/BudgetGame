@@ -1,19 +1,18 @@
 package com.example.external;
-import static com.microsoft.windowsazure.mobileservices.MobileServiceQueryOperations.*;
-
 import java.net.MalformedURLException;
 import java.util.List;
 
 import android.content.Context;
+
+import com.example.budgetgame.onTaskCompleted;
+import com.example.budgetgame.db.DBAdapter;
+import com.google.gson.JsonElement;
 import com.microsoft.windowsazure.mobileservices.ApiJsonOperationCallback;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceQuery;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
-import com.example.budgetgame.onTaskCompleted;
-import com.example.budgetgame.db.DBAdapter;
-import com.google.gson.*;
 
 
 

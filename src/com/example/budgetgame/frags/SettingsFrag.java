@@ -1,13 +1,12 @@
 package com.example.budgetgame.frags;
 
-import com.example.budgetgame.MainActivity;
-import com.example.budgetgame.R;
-
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+
+import com.example.budgetgame.MainActivity;
+import com.example.budgetgame.R;
 
 public class SettingsFrag extends PreferenceFragment {
 	

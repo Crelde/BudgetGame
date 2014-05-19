@@ -1,12 +1,13 @@
 package com.example.budgetgame.frags;
 
-import com.example.budgetgame.MainActivity;
-import com.example.budgetgame.R;
-import com.example.budgetgame.db.DBAdapter;
 import android.app.ListFragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.SimpleCursorAdapter;
+
+import com.example.budgetgame.MainActivity;
+import com.example.budgetgame.R;
+import com.example.budgetgame.db.DBAdapter;
 
 public class GoalHistoryFrag extends ListFragment {
 
