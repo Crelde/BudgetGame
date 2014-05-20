@@ -13,30 +13,41 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.budgetgame.SavingsAlarmReceiver;
 import com.example.external.Post;
 
+
+/**
+ * @author Kewin & Christian
+ * @summary Database Adapter that holds all databases functions, including 
+ * reading, writing, deleting and updating fields.
+ * 
+ */
 public class DBAdapter {
 	DBHelper helper;
 	SQLiteDatabase db;
 	Context context;
 	
+	// Table constants
 	String TABLE_POSTS = "Posteringer";
 	String TABLE_GOALS = "Goals";
 	String TABLE_GOALS_HISTORY = "History";
 	String TABLE_ACHIEVEMENTS = "Achievement";
 
+	// Intialize adapter
 	public DBAdapter(Context context) {
 		helper = new DBHelper(context);
 		this.context = context;
 		}
 
+	// Open adapter
 	public void open() {
 		db = helper.getWritableDatabase();
 	}
 
+	// Close adapter
 	public void close() {
 		db.close();
 	}
 
-
+	// Database function to insert a post, only used by ServerController.
 	public void insertPost(Post post){
 		ContentValues values = new ContentValues();
 		values.put("titel", post.titel);
@@ -45,64 +56,52 @@ public class DBAdapter {
 		db.insert(TABLE_POSTS, null, values);
 	}
 
+	// Database function to return all posts.
 	public Cursor getAllPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, null, null, null, null,
 				"dato DESC");
 		return query;
 	}
+	// Database function to return all posts with negative values.
 	public Cursor getNegPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb < 0", null, null, null,
 				"dato DESC");
 		return query;
 	}
-	
+	// Database function to return all posts with positive vaues.
 	public Cursor getPosPosts(){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "_id", "titel", "dato", "beloeb" }, "beloeb >= 0", null, null, null,
 				"dato DESC");
 		return query;
 	}
 	
+	// Database function to return a single post with the given id.
 	public Cursor getPost(int id){
 		Cursor query = db.query(TABLE_POSTS, new String[] { "titel", "dato", "beloeb" }, "_id="+id, null, null, null, null);
 		return query;
 	}
 	
-	
+	// Database function to return all goals.
 	public Cursor getAllGoals(){
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål" }, null, null, null, null,
 				"_id DESC");
 		return query;
 	}
 	
+	// Database function to return a single goal given the id.
 	public Cursor getGoal(long id){
 		Cursor query = db.query(TABLE_GOALS, new String[] { "_id", "titel", "beloebCurrent", "beloebMål", "toSavePerMonth", "dateCreated" }, "_id="+id, null, null, null, null);
 		return query;
 	}
 	
+	// Database function to return all achievements.
 	public Cursor getAchievements(){
 		Cursor query = db.query(TABLE_ACHIEVEMENTS, new String[] { "_id", "titel", "beskrivelse", "klaret" }, null, null, null, null,
 				"_id DESC");
-		
-		/*
-		query.moveToFirst();
-		System.out.println("DB PRINTS------");
-		System.out.println("columns:"+query.getColumnCount());
-		System.out.println(query.getInt(0));
-		System.out.println("DB PRINTS------");
-		query.moveToLast();
-		System.out.println("DB PRINTS------");
-		System.out.println("columns:"+query.getColumnCount());
-		System.out.println(query.getInt(0));
-		System.out.println("DB PRINTS------");
-		*/
-		
 		return query;			
 	}
 	
-	
-	
-	// Sets new goal and returns updated cursor 
-	// Is the return used? Doesnt look like it -Kewin
+	// Sets new goal and returns id.
 	public long setNewGoal(String titel, int mål, int prMonth){
 		ContentValues values = new ContentValues();
 		values.put("titel", titel);
@@ -133,11 +132,13 @@ public class DBAdapter {
 		return id;
 	}
 	
+	// Database function to delete a goal.
 	public boolean deleteGoal(int id){
 		if (db.delete(TABLE_GOALS, "_id="+id, null)==1) return true;
 		else return false;		
 	}
 	
+	// Database function to update a goal.	
 	public boolean updateGoal(ContentValues goal, int goalId, int extra){
 			
 		db.update(TABLE_GOALS, goal, "_id="+goalId, null);
@@ -152,7 +153,7 @@ public class DBAdapter {
 	}
 	
 	
-	
+	// Database function to return all history items.
 	public Cursor getHistory(){
 		Cursor query = db.query(TABLE_GOALS_HISTORY, new String[] { "_id", "titel", "beskrivelse", "dato" }, null, null, null, null,
 				"_id DESC");
@@ -193,6 +194,7 @@ public class DBAdapter {
 		return finished;
 	}
 	
+	// Convenience method to check for completion of achievments 2 and 3
 	private void checkAchievement(int goalId, float sum){
 		
 		// Initialize achievement
@@ -232,6 +234,7 @@ public class DBAdapter {
 		}		
 	}
 	
+	// Convenience method to get a string representing the current day.
 	private String getDateString(){
 		Calendar date = Calendar.getInstance();
 		int day = date.get(Calendar.DAY_OF_MONTH);
@@ -241,6 +244,7 @@ public class DBAdapter {
 		return dateString;
 	}
 	
+	// Method to update a goal as well as creating a history entry.
 	public boolean goalChangeDb(long goalId, String goalTitle, float current, float goal, float amount)
 	{
 		boolean goalFinished = false;
@@ -261,15 +265,13 @@ public class DBAdapter {
 		return goalFinished;
 	}
 	
+	// Method to create an android alarm on the 1st of the next month, to set aside money as defined by the goal.
 	public void setStandardAlarmForGoal(Context context, int goalId){
-		//Toast.makeText(this, "setStandardAlarmForGoal start", Toast.LENGTH_LONG).show();
 		// Set startDate to be the 1st of the next month, (if the alarm is created on the 7th of January, the Alarm will start on the 1st of February.
 		Calendar startDate = Calendar.getInstance();
 		startDate.setTimeInMillis(System.currentTimeMillis());
 		startDate.add(Calendar.MONTH, 1);
 		startDate.set(Calendar.DATE, 1);
-		
-		//startDate.add(Calendar.SECOND, 10);
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		
@@ -282,7 +284,7 @@ public class DBAdapter {
 	
 	
 	
-	
+	// Convenience method to delete all entries in post table. 
 	public void clearPosts() {
 		db.delete(TABLE_POSTS, null, null);
 	}

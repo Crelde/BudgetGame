@@ -36,6 +36,10 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
 
+/**
+ * @author Kewin & Christian
+ * @summary Main Activity that holds all content that the user sees and interacts with while logged in.
+ */
 public class MainActivity extends Activity {
 
 	DBAdapter dbAdapter;
@@ -51,10 +55,9 @@ public class MainActivity extends Activity {
 	private Button filterCancel;
 	private CheckBox checkpos;
 	private CheckBox checkneg;
-	private Dialog postsDialog;
+	private Dialog postsDialog;	
 	
-	
-	// awardControls
+	// Award Controls
 	private Dialog awardDialog;
 	private TextView awardTitle;
 	private TextView awardDesc;
@@ -64,7 +67,7 @@ public class MainActivity extends Activity {
 	static final String DESC = "beskrivelse";
 	static final String ACHIEVED = "klaret";
 	
-	//New goal controls
+	// New goal controls
 	private Dialog newGoalDialog;
 	private Button acceptGoalButton;
 	private Button cancelNewGoalButton;
@@ -72,11 +75,10 @@ public class MainActivity extends Activity {
 	private EditText newGoalAmountE;
 	private EditText newGoalAmountMonthE;
 	
-	//Edit goal controls
+	// Edit goal controls
 	private Dialog editGoalDialog;
 	private TextView goalTitle;
 	private TextView dateText;
-
 	private EditText goalSum;
 	private EditText savedCurrent;
 	private EditText savePerMonth;
@@ -97,24 +99,24 @@ public class MainActivity extends Activity {
 	PostsFrag postfrag = new PostsFrag();
 	OverviewFrag overfrag = new OverviewFrag();
 	GoalFrag goalfrag = new GoalFrag();
-	SettingsFrag settingfrag = new SettingsFrag(); // ÆNDRET KEWIN
+	SettingsFrag settingfrag = new SettingsFrag(); 
 	AchievementFrag achievefrag = new AchievementFrag();
 	
 	MainActivity self = this;
 	
+	// Interger vaues representing each fragment
 	public static final int FRAGMENT_HOME = 1;
 	public static final int FRAGMENT_GOALS = 2;
 	public static final int FRAGMENT_SETTINGS = 3;
 	public static final int FRAGMENT_POSTS = 4;
 	public static final int FRAGMENT_ACHIEVEMENTS = 5;
 	
+	// Server communication
 	public ServerController controller;
-	public onTaskCompleted listener;
 	public String currentUser;
 	
-	//Facebook stuff
+	// Facebook stuff
 	public UiLifecycleHelper uiHelper;	
-	private static final String TAG = "Facebook";	
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 	    @Override
 	    public void call(Session session, SessionState state, Exception exception) {
@@ -142,7 +144,7 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		
+		// Facebook
 		 uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
 		        @Override
 		        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
@@ -159,9 +161,11 @@ public class MainActivity extends Activity {
 	@Override
 	public void onPause() {
 	    super.onPause();
+	    // Facebook
 	    uiHelper.onPause();
 	}
 	
+	// Disables navigation buttons
 	public void DisableNavigation(){
 		homeButton.setEnabled(false);
 		postsButton.setEnabled(false);
@@ -170,6 +174,7 @@ public class MainActivity extends Activity {
 		achievementsButton.setEnabled(false);
 	}
 	
+	// Enables navigation buttons
 	public void EnableNavigation(){
 		homeButton.setEnabled(true);
 		postsButton.setEnabled(true);
@@ -183,15 +188,20 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		
-		
+		// Intiliaze view
 		setContentView(R.layout.activity_main);
+		// Get user from LogIn Activity
 		Intent intent = getIntent();
 		currentUser = intent.getExtras().getString("userName");
 		
+		// Intiliaze database adapter
 		dbAdapter = new DBAdapter(this);
 		dbAdapter.open();
 		
-		//Facebook stuff 
+		// Initialize server controller
+		controller = new ServerController();
+		
+		// Facebook 
 		uiHelper = new UiLifecycleHelper(this, callback);
 	    uiHelper.onCreate(savedInstanceState);
 		
@@ -206,18 +216,15 @@ public class MainActivity extends Activity {
 		
 		
 		
-		// Initial adding of the overview fragment.
+		// Initial adding of the overview fragment, if no other fragment was present.
 		if (savedInstanceState == null)
 		{
 			changeFragment(FRAGMENT_HOME); 	
 		}
-		controller = new ServerController();
-	
-		//controller.getSaldoForUser(this, "test1", listener);
-		//controller.syncPosts(this, "test2");
-		//controller.logIn(this, "test1", "646464", listener);
+		
+		
 					
-		// Implementations of button onclicks so they change between the fragments
+		// Implementations of navigation onclicks so they change between the fragments
 		homeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -262,17 +269,19 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	//Facebook
+	// Facebook debugging
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    if (state.isOpened()) {
-	        Log.i(TAG, "Logged in...");
+	        Log.i("Facebook", "Logged in...");
 	    } else if (state.isClosed()) {
-	        Log.i(TAG, "Logged out...");
+	        Log.i("Facebook", "Logged out...");
 	    }
 	}
 	
+	// Convenience method for making toasts.
 	public void makeToast(String toast){ Toast.makeText(this, toast, Toast.LENGTH_SHORT).show(); }
 		
+	// Changes fragment when a navigation button is pressed.
 	public void changeFragment(int fragment){
 		
 		setActiveFragment(fragment);
@@ -280,7 +289,6 @@ public class MainActivity extends Activity {
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		
-		//getResources().getColor(R.color.idname);
 		if (fragment == FRAGMENT_HOME) ft.replace(R.id.FragmentContainer, overfrag);
 		
 		else if (fragment == FRAGMENT_POSTS) ft.replace(R.id.FragmentContainer, postfrag);
@@ -297,6 +305,7 @@ public class MainActivity extends Activity {
 		ft.commit();
 	}
 	
+	// Handles showing which fragment is currently active on the navigation buttons.
 	public void setActiveFragment(int fragment){
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -335,6 +344,7 @@ public class MainActivity extends Activity {
 		else achievementsButton.setBackgroundColor(inactiveColor);
 	}
 
+	// Shows the dialog for viewing and editting a goal.
 	public void ShowEditGoalDialog(final Cursor goal){
 		editGoalDialog = new Dialog(MainActivity.this);
 		editGoalDialog.setContentView(R.layout.editgoaldialog);
@@ -349,7 +359,6 @@ public class MainActivity extends Activity {
 		float perMonth = goal.getFloat(4);
 		String dateCreated = goal.getString(5);
 		final int goalId = goal.getInt(0);
-
 	
 		// Initialize views
 		goalTitle = (TextView) editGoalDialog.findViewById(R.id.editGoalDialogTitle);
@@ -385,9 +394,7 @@ public class MainActivity extends Activity {
 				g.setStandardAlarmForGoal(getApplicationContext(),goalId);
 			}
 		});
-		
-		
-		
+				
 		saveButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -438,8 +445,8 @@ public class MainActivity extends Activity {
 		
 		
 	}
-
-	public void showPostDialog(int postId){
+	// Shows the dialog for viewing a post.
+	public void ShowPostDialog(int postId){
 		showPostDialog = new Dialog(MainActivity.this);
 		showPostDialog.setContentView(R.layout.showpostdialog);
 		showPostDialog.setTitle("Postering");
@@ -454,19 +461,19 @@ public class MainActivity extends Activity {
 		postDate = (TextView) showPostDialog.findViewById(R.id.showPostDialogDate);
 		facebookSharePost = (Button) showPostDialog.findViewById(R.id.showPostDialogFacebookButton);
 		closePostDialog = (Button) showPostDialog.findViewById(R.id.showPostDialogCloseButton);
-		//Cursor query = db.query(TABLE_POSTS, new String[] { "titel", "dato", "beloeb" }, "_id="+id, null, null, null, null);
-		post.moveToFirst();
 		
+		// Cursor fields
+		post.moveToFirst();		
 		final String desc = post.getString(0);
 		final String date = post.getString(1);
 		final float amount = post.getFloat(2);
 		
-		//post.close();
-		
+		// Set fields in dialog
 		postDesc.setText(desc);
 		postDate.setText(date);
 		postAmount.setText(""+amount);
 		
+		// onClick listeners
 		closePostDialog.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
@@ -474,11 +481,13 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		// Facebook share button
 		facebookSharePost.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				showPostDialog.dismiss();
+				// Creates a facebook shareDialog which will share a link with title and subtitle defined by us.
 				String title;
 				if (amount<0) title = "Jeg har d. " + date + " brugt " + -amount + " kr.!";
 				else title = "Jeg har d. " + date + " fået " + amount + " kr. ind på kontoen!";
@@ -494,20 +503,25 @@ public class MainActivity extends Activity {
 	
 	}
 	
+	// Shows the dialog for viewing an award.
 	public void ShowAwardDialog(ContentValues award){
 		awardDialog = new Dialog(MainActivity.this);
 		awardDialog.setContentView(R.layout.achievementdialog);
 		awardDialog.setTitle("Medaljebeskrivelse");
 		awardDialog.show();
+		
+		// Intialize views
 		awardAchievedImage = (ImageView)awardDialog.findViewById(R.id.awardDialogImage);
 		awardTitle = (TextView)awardDialog.findViewById(R.id.awardDialogTitleView);
 		awardDesc = (TextView)awardDialog.findViewById(R.id.awardDialogDesc);
 		awardOkButton = (Button)awardDialog.findViewById(R.id.awardDialogOkButton);
 		
+		// Set view fields
 		awardTitle.setText(award.getAsString(TITLE));
 		awardDesc.setText(award.getAsString(DESC));
 		if (award.getAsInteger(ACHIEVED)==1) awardAchievedImage.setImageDrawable(getResources().getDrawable(R.drawable.icon_yes));
 		
+		// onClick Listener
 		awardOkButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -518,23 +532,27 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	public void ShowFilterDialog(View v){
-		
+	// Shows the dialog to define a filter for viewing posts
+	public void ShowFilterDialog(View v){		
 		postsDialog = new Dialog(MainActivity.this);
 		postsDialog.setContentView(R.layout.filterdialog);
 		postsDialog.setTitle("Vælg Filtre");
 		postsDialog.show();
+		
+		// Intialize views
 		checkpos = (CheckBox)postsDialog.findViewById(R.id.checkpos);
 		checkneg = (CheckBox)postsDialog.findViewById(R.id.checkneg);
 		filterOK = (Button)postsDialog.findViewById(R.id.filterOK);
 		filterCancel = (Button)postsDialog.findViewById(R.id.filterCancel);
 		
+		// onClick Listeners, 
 		filterOK.setOnClickListener(new View.OnClickListener() {
 			
+			// Shows the user the posts the user wishes to see, as defined by their filter.
 			@Override
 			public void onClick(View v) {
 				PostsFrag f = (PostsFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
-				// if the user doesn't check anything we'll show everything (as if they pressed both)
+				// If the user doesn't check anything we'll show everything (as if they pressed both)
 				if (checkpos.isChecked() && !checkneg.isChecked())
 					f.updatePosts(true, false);
 				else if (!checkpos.isChecked() && checkneg.isChecked())
@@ -550,47 +568,51 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				postsDialog.cancel();
-			}});
-	
-		
+			}});		
 	}
 
-	public void ShowNewGoalDialog(View v){
-		
+	// Shows the dialog for creating a new goal.
+	public void ShowNewGoalDialog(View v){	
 		newGoalDialog = new Dialog(MainActivity.this);
 		newGoalDialog.setContentView(R.layout.newgoaldialog);
 		newGoalDialog.setTitle("Opret nyt mål");
 		newGoalDialog.show();
+		
+		// Intialize views
 		newGoalNameE = (EditText)newGoalDialog.findViewById(R.id.newGoalDialogNameE);
 		newGoalAmountE= (EditText)newGoalDialog.findViewById(R.id.newGoalDialogAmountE);
 		newGoalAmountMonthE = (EditText)newGoalDialog.findViewById(R.id.newGoalDialogAmountMonthE);
 		acceptGoalButton = (Button)newGoalDialog.findViewById(R.id.acceptnewGoalDialogButton);
 		cancelNewGoalButton= (Button)newGoalDialog.findViewById(R.id.cancelnewGoalDialogButton);
-		newGoalDialog.setCancelable(false);
-		acceptGoalButton.setOnClickListener(new View.OnClickListener() {
-			
+		//newGoalDialog.setCancelable(false);
+		
+		// onClick Listeners
+		acceptGoalButton.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				GoalFrag g = (GoalFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
-				// if the user doesn't check anything we'll show everything (as if they pressed both)
-			
+				
+				// Make sure fields are all filled.
 				if(newGoalNameE.getText().toString().trim().length() <= 0 ||
 						newGoalAmountE.getText().toString().trim().length() <= 0 || 
 							newGoalAmountMonthE.getText().toString().trim().length() <= 0){		
-					Toast.makeText(getApplicationContext(), "Udfyld venligst alle felter!", Toast.LENGTH_SHORT).show();		
+					makeToast("Udfyld venligst alle felter!");		
 				}
-				else if (Integer.valueOf(newGoalAmountE.getText().toString())==0) makeToast("Målet kan ikke være 0!");
-				else {
-					try{
-					int id = (int) g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
-					g.setStandardAlarmForGoal(getApplicationContext(),id);
-					newGoalDialog.dismiss();
+				
+				 
+				// Make sure input is not over max int.
+				try{
+					// Make sure goal isnt 0
+					if(Integer.valueOf(newGoalAmountE.getText().toString())==0) makeToast("Målet kan ikke være 0!");
+					else {
+						int id = (int) g.setNewGoal(newGoalNameE.getText().toString(), Integer.parseInt(newGoalAmountE.getText().toString()), Integer.parseInt(newGoalAmountMonthE.getText().toString()));
+						g.setStandardAlarmForGoal(getApplicationContext(),id);
+						newGoalDialog.dismiss();
 					}
+				}
 					catch(NumberFormatException e){
 						makeToast("Tallet er for højt!");
-					}
-					
-				}	
+					}	
 			}});
 		
 		cancelNewGoalButton.setOnClickListener(new View.OnClickListener() {
@@ -611,6 +633,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+		// Facebook
 		uiHelper.onSaveInstanceState(outState);
 	}
 	
@@ -618,6 +641,7 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		dbAdapter.close();
+		// Facebook
 		uiHelper.onDestroy();
 	}
 	 

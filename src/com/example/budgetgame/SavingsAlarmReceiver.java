@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+/**
+ * @author Kewin & Christian
+ * @summary BroadCast Receiver that sets aside money for goals when received.
+ */
 public class SavingsAlarmReceiver extends BroadcastReceiver {
 
 	DBAdapter dbAdapter;

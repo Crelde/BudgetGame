@@ -5,6 +5,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * @author Kewin & Christian
+ * @summary SQLiteOpenHelper class that handles database context creation, as well as upgrades when relevant.
+ * 
+ */
+
 public class DBHelper extends SQLiteOpenHelper {
 	
 	public static final int DB_VERSION = 16;
@@ -25,14 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// Sample data for testing
+		// Create tables, as well as inserting dummy data for the user to see when they start the app.
 		db.execSQL("CREATE TABLE " + TABLE_POSTS + " (_id integer primary key autoincrement, titel text, dato text, beloeb float)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('FreshFitness', '03-04-2014', -200)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Netto', '06-04-2014', -350)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Løn', '01-05-2014', 8948.43)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('SU', '01-05-2014', 2905.29)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Amazon', '05-05-2014', -350)");
-		db.execSQL("INSERT INTO " + TABLE_POSTS + " (titel, dato, beloeb) VALUES ('Bilka', '09-05-2014', -1252.20)");
 		
 		db.execSQL("CREATE TABLE " + TABLE_GOALS + " (_id integer primary key autoincrement, titel text, beloebCurrent float, beloebMål float, toSavePerMonth float, dateCreated date )");
 		db.execSQL("INSERT INTO " + TABLE_GOALS + " (titel, beloebCurrent, beloebMål, toSavePerMonth, dateCreated) VALUES ('Julegaver', 1500 , 1500, 750, '2013-17-10')");
@@ -76,6 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE " + TABLE_POSTS);
 		
+		// These tables were created in later versions, and cannot not be destroyed as they do not exist in previous versions.
 		if (oldVersion>=2) db.execSQL("DROP TABLE " + TABLE_GOALS);				
 		if (oldVersion>=3) db.execSQL("DROP TABLE " + TABLE_GOALS_HISTORY);		
 		if (oldVersion>=10) db.execSQL("DROP TABLE " + TABLE_ACHIEVEMENTS);

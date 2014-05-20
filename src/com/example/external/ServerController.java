@@ -15,12 +15,14 @@ import com.microsoft.windowsazure.mobileservices.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.TableQueryCallback;
 
 
-
+/**
+ * @author Kewin & Christian
+ * @summary Class that handles all communication with the server.
+ * 
+ */
 public class ServerController {
-
+	// Initialize values
 	DBAdapter dbAdapter;
-	
-	public String TAG = "hej";
 	String url = "https://budgetgame.azure-mobile.net/";
 	String appkey = "zIeRvsVAjXhqWYIUYvefFFENBpvArJ90";
 	boolean login = false;
@@ -30,6 +32,7 @@ public class ServerController {
 	private MobileServiceClient mClient;
 	private MobileServiceTable<Post> mPostTable;
 
+	// Called from LogInActivity to very a users information, and notify the supplied listener with the response.
 	public void logIn(final Context context, final String username, String password, final onTaskCompleted listener){
 		this.listener = listener;
 		try {
@@ -37,23 +40,22 @@ public class ServerController {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		// invoke Log-in method from server
 		
+		// invoke Log-in method from server	
 		mClient.invokeApi("Budget?username="+username+"&password="+password,
 				new ApiJsonOperationCallback() {
 					@Override
 					public void onCompleted(JsonElement jsonData, Exception error,
-							ServiceFilterResponse response) {
-						
+							ServiceFilterResponse response) {				
 						login = jsonData.getAsBoolean();
 						if(login){
 							syncPosts(context, username);
 						}
-						listener.getLogInTaskCompleted(login);
-						
+						listener.getLogInTaskCompleted(login);				
 					}
 				});		
 	}
+	// Called from OverViewFragment to get a users Saldo, and notify the supplied listener with the result.
 	public void getSaldoForUser(Context context, String username, final onTaskCompleted listener)
 	{
 		this.listener = listener;
@@ -62,28 +64,25 @@ public class ServerController {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		// invoke Log-in method from server
-		
+		// invoke getSaldo method from server	
 		mClient.invokeApi("Budget?userNameToGetSaldoFor="+username, "get", null,
 				new ApiJsonOperationCallback() {
 					@Override
 					public void onCompleted(JsonElement jsonData, Exception error,
-							ServiceFilterResponse response) {
-						
+							ServiceFilterResponse response) {		
 						saldo = jsonData.getAsDouble();
-						listener.getSaldoTaskCompleted(saldo);
-						
+						listener.getSaldoTaskCompleted(saldo);			
 					}
 				});
 	}
+	// Method called when a user is successfully logged in, to get load his posts into the phones local database.
 	public void syncPosts(Context context, final String name){
 		try {
 			mClient = new MobileServiceClient(url, appkey, context);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		// invoke Log-in method from server
-		
+		// invoke getPosts method from server		
 		dbAdapter = new DBAdapter(context);
 		mPostTable = mClient.getTable(Post.class);
 		MobileServiceQuery<TableQueryCallback<Post>> msq = mPostTable.top(500);

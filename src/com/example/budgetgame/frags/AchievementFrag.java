@@ -17,6 +17,12 @@ import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
 
+
+/**
+ * @author Kewin & Christian
+ * @summary Fragment that displays achievements to the user.
+ * 
+ */
 public class AchievementFrag extends Fragment {
 
 	static final String TITLE = "titel";
@@ -25,7 +31,7 @@ public class AchievementFrag extends Fragment {
 	
 	MainActivity mainActivity;
 	
-	// Contents of used achievements
+	// Contents of our achievements
 	ContentValues awardValue_1;
 	ContentValues awardValue_2;
 	ContentValues awardValue_3;
@@ -52,9 +58,7 @@ public class AchievementFrag extends Fragment {
 	RelativeLayout awardLayout_7;
 	RelativeLayout awardLayout_8;
 	RelativeLayout awardLayout_9;
-	
-	
-	
+		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {	
@@ -62,6 +66,7 @@ public class AchievementFrag extends Fragment {
 		return inflater.inflate(R.layout.achievements, container, false);
 	}
 	
+	// Sets views as non-transparent if an achievement has been claimed, as well as updating class fields.
 	private void checkAchievementStatus(){
 		boolean awardReached_1 = false;
 		boolean awardReached_2 = false;
@@ -80,15 +85,12 @@ public class AchievementFrag extends Fragment {
 		
 	}
 	
-	
+	// Intialized achievement values from the database
 	private void initAchievementValues(){
 		DBAdapter dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		
 		Cursor achievements = dbAdapter.getAchievements();
-		
-
-		
 		
 		achievements.moveToFirst();
 		
@@ -129,11 +131,9 @@ public class AchievementFrag extends Fragment {
 		awardValue_none.put(TITLE, "Findes ikke");
 		awardValue_none.put(DESC, "Medaljen kan ikke opnås.");
 		awardValue_none.put(ACHIEVED, 0);
-		
-		
-
 	}
 	
+	// Initialized achievement views.
 	private void initAchievementViews(){
 		
 		Activity a = getActivity();
@@ -176,14 +176,13 @@ public class AchievementFrag extends Fragment {
 	public void onResume() {
 		super.onResume();
 		
+		// Call initial functions, as well as setting initial values
 		getActivity().setTitle("Medaljer");
 		initAchievementValues();
 		initAchievementViews();
 		checkAchievementStatus();
 		
 		mainActivity = (MainActivity) getActivity();
-				
-		
 		awardText_1.setText(awardValue_1.getAsString(TITLE));
 		awardText_2.setText(awardValue_2.getAsString(TITLE));
 		awardText_3.setText(awardValue_3.getAsString(TITLE));
@@ -229,14 +228,5 @@ public class AchievementFrag extends Fragment {
 		awardLayout_7.setOnClickListener(noAwardClickListener);
 		awardLayout_8.setOnClickListener(noAwardClickListener);
 		awardLayout_9.setOnClickListener(noAwardClickListener);
-			
-		
-	
-				
-				
-				//awardLayout_1.setBackground(awardedBackground);
-		
-	
-		//award1.setOnClickListener(l) // Comment for fun
 	}
 }

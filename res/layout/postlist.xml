@@ -17,7 +17,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
-        android:onClick="ShowPostsDialog"
+        android:onClick="ShowFilterDialog"
         android:text="Filter" />
     
 </RelativeLayout>

@@ -15,11 +15,17 @@ import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
 
+/**
+ * @author Kewin & Christian
+ * @summary Fragment that displays the posts the user wishes to see.
+ * 
+ */
 public class PostsFrag extends ListFragment {
 
 
 	DBAdapter dbAdapter;
 
+	// Function to update the listview depending on the users preferences.
 	public void updatePosts(boolean positive, boolean negative){
 		if(positive && negative)
 			initAllPosts();
@@ -28,6 +34,8 @@ public class PostsFrag extends ListFragment {
 		else if(!positive && negative)
 			initNegPosts();
 	}
+	
+	// Intialize list view with all posts.
 	public void initAllPosts(){
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
@@ -39,6 +47,7 @@ public class PostsFrag extends ListFragment {
 		setListAdapter(cursorAdapter);
 		
 	}
+	// Intialize list view with positive posts.
 	public void initPosPosts(){
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
@@ -49,6 +58,8 @@ public class PostsFrag extends ListFragment {
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
 	}
+	
+	// Intialize list view with negative posts.
 	public void initNegPosts(){
 			dbAdapter = new DBAdapter(getActivity());
 			dbAdapter.open();
@@ -82,17 +93,15 @@ public class PostsFrag extends ListFragment {
 		super.onResume();
 		getActivity().setTitle("Posteringer");
 		
-		//OnItemClickListener//
-				ListView list = (ListView) getActivity().findViewById(android.R.id.list);		
-				//System.out.println(list.toString());
-				list.setOnItemClickListener(new OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-						((MainActivity) getActivity()).showPostDialog((int) id);
-						
-					                
-					            }
-					        });
+		//OnItemClickListener, which displays the dialog to show and share a post on facebook.
+		ListView list = (ListView) getActivity().findViewById(android.R.id.list);		
+		//System.out.println(list.toString());
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				((MainActivity) getActivity()).ShowPostDialog((int) id);	                
+			            }
+        });
 	}
 	
 	@Override

@@ -20,19 +20,26 @@ import android.widget.SimpleCursorAdapter;
 import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
-
+/**
+ * @author Kewin & Christian
+ * @summary Fragment that displays goals to the user, 
+ * as well as allowing the user to create, update and delete existing ones
+ * 
+ * 
+ */
 public class GoalFrag extends ListFragment {
 
 	DBAdapter dbAdapter;
 
 	
-	
+	// Create a new goal in the database.
 	public long setNewGoal(String titel, int beloeb, int toSave){
 		long id = dbAdapter.setNewGoal(titel, beloeb, toSave);
 		initGoals();
 		return id;
 	}
 	
+	// Set alarm for goal that set aside money each month.
 	public void setStandardAlarmForGoal(Context context, int id)
 	{
 		dbAdapter.setStandardAlarmForGoal(context, id);
@@ -44,10 +51,6 @@ public class GoalFrag extends ListFragment {
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		initGoals();
-		
-		
-		
-		
 	}
 	
 	@Override
@@ -69,7 +72,7 @@ public class GoalFrag extends ListFragment {
 			                
 			            }
 			        });
-		
+		// Intiilaze history button, and set its onCliclListener to change the content fragment.
 		Button goalHistoryButton = (Button) getActivity().findViewById(R.id.goalHistoryButton);
 		goalHistoryButton.setOnClickListener(new OnClickListener() {
 		
@@ -82,6 +85,8 @@ public class GoalFrag extends ListFragment {
 		}
 	});
 	}
+	
+	// Intialize goals from the database.
 	public void initGoals(){
 		Cursor c = dbAdapter.getAllGoals();
 		//getActivity().startManagingCursor(c);

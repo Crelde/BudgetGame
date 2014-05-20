@@ -9,6 +9,11 @@ import com.example.budgetgame.MainActivity;
 import com.example.budgetgame.R;
 import com.example.budgetgame.db.DBAdapter;
 
+/**
+ * @author Kewin & Christian
+ * @summary Fragment that displays history entries to the user.
+ * 
+ */
 public class GoalHistoryFrag extends ListFragment {
 
 	DBAdapter dbAdapter;
@@ -17,11 +22,11 @@ public class GoalHistoryFrag extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// Get history entries from database,´.
 		String[] columns = new String[] {"titel", "beskrivelse", "dato", "_id"};
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		Cursor cursor = dbAdapter.getHistory();
-		
 		
 		SimpleCursorAdapter adapter = 
 		        new SimpleCursorAdapter(
