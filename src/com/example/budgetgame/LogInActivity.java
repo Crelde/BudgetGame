@@ -49,7 +49,7 @@ public class LogInActivity extends Activity {
 			
 			@Override
 			public void getLogInTaskCompleted(boolean login) {
-				loginSpinner.setVisibility(8);
+				loginSpinner.setVisibility(4);
 				userNameEdit.setEnabled(true);
 				passWordEdit.setEnabled(true);
 				loginButton.setEnabled(true);

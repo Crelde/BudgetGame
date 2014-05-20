@@ -75,9 +75,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE " + TABLE_POSTS);
-		db.execSQL("DROP TABLE " + TABLE_GOALS);
-		db.execSQL("DROP TABLE " + TABLE_GOALS_HISTORY);
 		
+		if (oldVersion>=2) db.execSQL("DROP TABLE " + TABLE_GOALS);				
+		if (oldVersion>=3) db.execSQL("DROP TABLE " + TABLE_GOALS_HISTORY);		
 		if (oldVersion>=10) db.execSQL("DROP TABLE " + TABLE_ACHIEVEMENTS);
 		
 		
