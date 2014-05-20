@@ -77,7 +77,6 @@ public class GoalFrag extends ListFragment {
 		public void onClick(View v) {
 			FragmentManager fm = getFragmentManager();
 			FragmentTransaction ft = fm.beginTransaction();
-			ft.addToBackStack(null);
 			ft.replace(R.id.FragmentContainer, new GoalHistoryFrag());
 			ft.commit();					
 		}
@@ -85,13 +84,13 @@ public class GoalFrag extends ListFragment {
 	}
 	public void initGoals(){
 		Cursor c = dbAdapter.getAllGoals();
-		getActivity().startManagingCursor(c);
+		//getActivity().startManagingCursor(c);
 		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
 				getActivity(), R.layout.goalitem, c, new String[] {
 						"titel", "beloebCurrent", "beloebMål" }, new int[] { R.id.goalNameE,
 						R.id.currentStatusE, R.id.goalAmountE});
 		setListAdapter(cursorAdapter);
-		
+			
 	}
 	
 	@Override

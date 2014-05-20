@@ -335,7 +335,7 @@ public class MainActivity extends Activity {
 		else achievementsButton.setBackgroundColor(inactiveColor);
 	}
 
-	public void ShowEditGoalDialog(Cursor goal){
+	public void ShowEditGoalDialog(final Cursor goal){
 		editGoalDialog = new Dialog(MainActivity.this);
 		editGoalDialog.setContentView(R.layout.editgoaldialog);
 		editGoalDialog.setTitle("Mål");
@@ -380,6 +380,7 @@ public class MainActivity extends Activity {
 				GoalFrag g = (GoalFrag) getFragmentManager().findFragmentById(R.id.FragmentContainer);
 				dbAdapter.deleteGoal(goalId);
 				editGoalDialog.dismiss();
+				goal.close();
 				goalfrag.initGoals();
 				g.setStandardAlarmForGoal(getApplicationContext(),goalId);
 			}
@@ -420,6 +421,7 @@ public class MainActivity extends Activity {
 			
 					dbAdapter.updateGoal(newGoal, goalId, extra);
 					editGoalDialog.dismiss();
+					goal.close();
 					goalfrag.initGoals();
 					success = true;
 					
@@ -459,7 +461,7 @@ public class MainActivity extends Activity {
 		final String date = post.getString(1);
 		final float amount = post.getFloat(2);
 		
-		
+		//post.close();
 		
 		postDesc.setText(desc);
 		postDate.setText(date);
@@ -615,7 +617,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
+		dbAdapter.close();
 		uiHelper.onDestroy();
 	}
 	 

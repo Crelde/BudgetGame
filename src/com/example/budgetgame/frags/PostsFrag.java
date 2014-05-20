@@ -32,38 +32,32 @@ public class PostsFrag extends ListFragment {
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		Cursor c = dbAdapter.getAllPosts();
-		getActivity().startManagingCursor(c);
 		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
 				getActivity(), R.layout.postitem, c, new String[] {
 						"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
-		getActivity().stopManagingCursor(c);
 		
 	}
 	public void initPosPosts(){
 		dbAdapter = new DBAdapter(getActivity());
 		dbAdapter.open();
 		Cursor c = dbAdapter.getPosPosts();
-		getActivity().startManagingCursor(c);
 		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
 				getActivity(), R.layout.postitem, c, new String[] {
 						"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 						R.id.dato, R.id.beloeb});
 		setListAdapter(cursorAdapter);
-		getActivity().stopManagingCursor(c);
 	}
 	public void initNegPosts(){
 			dbAdapter = new DBAdapter(getActivity());
 			dbAdapter.open();
 			Cursor c = dbAdapter.getNegPosts();
-			getActivity().startManagingCursor(c);
 			SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
 					getActivity(), R.layout.postitem, c, new String[] {
 							"titel", "dato", "beloeb" }, new int[] { R.id.titel,
 							R.id.dato, R.id.beloeb});
 			setListAdapter(cursorAdapter);
-			getActivity().stopManagingCursor(c);
 		}
 	
 	
