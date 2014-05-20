@@ -32,7 +32,7 @@ public class ServerController {
 	private MobileServiceClient mClient;
 	private MobileServiceTable<Post> mPostTable;
 
-	// Called from LogInActivity to very a users information, and notify the supplied listener with the response.
+	// Called from LogInActivity to verify a users information, and notify the supplied listener with the response.
 	public void logIn(final Context context, final String username, String password, final onTaskCompleted listener){
 		this.listener = listener;
 		try {
@@ -41,13 +41,15 @@ public class ServerController {
 			e.printStackTrace();
 		}	
 		
-		// invoke Log-in method from server	
+		// invoke Log-in method from server, a REST call
 		mClient.invokeApi("Budget?username="+username+"&password="+password,
 				new ApiJsonOperationCallback() {
+					// When it is complete it sets the login variable and returns it by calling the method on the listener
 					@Override
 					public void onCompleted(JsonElement jsonData, Exception error,
 							ServiceFilterResponse response) {				
 						login = jsonData.getAsBoolean();
+						// If the login was correct we sync the SQLite database with the server database posts.
 						if(login){
 							syncPosts(context, username);
 						}
@@ -82,15 +84,14 @@ public class ServerController {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}	
-		// invoke getPosts method from server		
+		// This part utilizes a MobileServiceTable on which you can write a query to the database on that table.
 		dbAdapter = new DBAdapter(context);
 		mPostTable = mClient.getTable(Post.class);
 		MobileServiceQuery<TableQueryCallback<Post>> msq = mPostTable.top(500);
 		msq.endsWith("username", name).execute(new TableQueryCallback<Post>() {
+			// When it completes we delete all the posts from the sqlite and put all the new ones in. We do this with the items casted to Post objects
 			public void onCompleted(List<Post> result, int count, Exception exception, ServiceFilterResponse response) {
-				System.out.println("BEFORE IF");
-				if (exception == null) {
-					System.out.println("AFTER IF");
+				if (exception == null) {;
 					dbAdapter.open();
 					dbAdapter.clearPosts();
 					for (Post item : result) {					
