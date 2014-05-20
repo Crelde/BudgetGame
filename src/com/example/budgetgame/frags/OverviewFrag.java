@@ -68,7 +68,7 @@ public class OverviewFrag extends Fragment {
 						//if (goals.isLast()) atLastPosition = true;
 					}
 					//goals.
-					goals.close();
+					//goals.close();
 				}				
 				
 				Calendar date = Calendar.getInstance();
@@ -122,11 +122,13 @@ public class OverviewFrag extends Fragment {
 		activity.controller.getSaldoForUser(activity, activity.currentUser, task);	
 		//ServerController controller = new ServerController();
 		//controller.getSaldoForUser(getActivity(), username, listener)
+		//adapter.close();
 	}
 	public static BigDecimal round(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);       
         return bd;
     }
+
 
 }

@@ -31,7 +31,7 @@ public class GoalHistoryFrag extends ListFragment {
 		        		columns, 
 		        		new int[] { R.id.goalName, R.id.historyText, R.id.historyDate });
 
-		setListAdapter(adapter);		
+		setListAdapter(adapter);
 	}
 	@Override
 	public void onResume() {
