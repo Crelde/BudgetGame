@@ -483,7 +483,7 @@ public class MainActivity extends Activity {
 				if (amount<0) title = "Jeg har d. " + date + " brugt " + -amount + " kr.!";
 				else title = "Jeg har d. " + date + " fået " + amount + " kr. ind på kontoen!";
 				FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(self)
-					//.setLink("https://developers.facebook.com/android")
+					.setLink("https://developers.facebook.com/android")
 			        .setCaption("Jeg bruger BudgetHelper til at hjælpe med at holde styr på økonomien, du skulle prøve!")
 					.setName(title)
 			        .build();
@@ -518,7 +518,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	public void ShowPostsDialog(View v){
+	public void ShowFilterDialog(View v){
 		
 		postsDialog = new Dialog(MainActivity.this);
 		postsDialog.setContentView(R.layout.filterdialog);
